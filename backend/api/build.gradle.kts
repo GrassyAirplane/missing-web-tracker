@@ -7,7 +7,6 @@ plugins {
 dependencies {
     implementation(projects.core)
 
-    implementation("org.springframework:spring-web:6.0.5")
     implementation("org.springframework.boot:spring-boot-starter-web")
     testImplementation("org.springframework.boot:spring-boot-starter-test")
 }
@@ -17,6 +16,10 @@ tasks {
     assemble {
         // Run the shadowJar task by default
         dependsOn(shadowJar)
+    }
+
+    withType<Test>{
+        useJUnitPlatform()
     }
 
 }
