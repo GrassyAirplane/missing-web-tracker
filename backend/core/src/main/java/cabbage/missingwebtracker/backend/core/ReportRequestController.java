@@ -87,7 +87,7 @@ public class ReportRequestController {
         }
     }
 
-    @PutMapping(value = "/report/newReport")
+    @PutMapping(value = "/reports/newReport")
     public boolean submitReport(String json) {
         Optional<MissingReport> optionalMissingReport;
         try {
