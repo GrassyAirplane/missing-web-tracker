@@ -1,7 +1,9 @@
 :root {
-  /* font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
+}
+
 @import url('https://fonts.googleapis.com/css2?family=Manrope&family=Open+Sans:wght@300&display=swap');
 @tailwind base;
 @tailwind components;
@@ -15,7 +17,7 @@
     box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
 }
 
-
+/* 
 button {
   border-radius: 8px;
   border: 1px solid transparent;
@@ -45,8 +47,8 @@ button:focus-visible {
   }
   button {
     background-color: #f9f9f9;
-  } */
-}
+  }
+} */
 
 .missing-img {
     border-radius: 1.5rem 1.5rem 0 0;
