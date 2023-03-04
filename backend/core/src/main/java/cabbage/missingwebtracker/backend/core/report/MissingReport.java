@@ -1,5 +1,6 @@
 package cabbage.missingwebtracker.backend.core.report;
 
+import cabbage.missingwebtracker.backend.core.util.Age;
 import cabbage.missingwebtracker.backend.core.util.GeographicLocation;
 
 import java.util.UUID;
@@ -17,5 +18,10 @@ public interface MissingReport {
     ReportType reportType();
 
     ReportSourceType reportSourceType();
+
+    String name();
+
+    Age age();
+
 
 }

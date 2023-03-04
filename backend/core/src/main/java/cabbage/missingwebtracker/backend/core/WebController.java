@@ -5,6 +5,7 @@ import cabbage.missingwebtracker.backend.core.report.MissingReport;
 import cabbage.missingwebtracker.backend.core.report.PersonMissingReportBuilder;
 import cabbage.missingwebtracker.backend.core.report.PetMissingReportBuilder;
 import cabbage.missingwebtracker.backend.core.report.ReportSourceType;
+import cabbage.missingwebtracker.backend.core.report.ReportType;
 import cabbage.missingwebtracker.backend.core.util.Age;
 import cabbage.missingwebtracker.backend.core.util.GeographicLocation;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -24,6 +25,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
+import java.util.stream.Stream;
 
 @RestController
 public class WebController {
@@ -61,6 +63,19 @@ public class WebController {
     public String allReports() {
         final List<MissingReport> reportList = new ArrayList<>(database.allReports());
         return serializeReports(reportList);
+    }
+
+    @RequestMapping(value = "/reports", method = RequestMethod.GET)
+    public String queryReportsByCriteria(@RequestParam(value = "name", required = false) String name,
+                                         @RequestParam(value = "reportType", required = false) ReportType reportType) {
+        Stream<MissingReport> stream = database.allReports().stream();
+        if (name != null) {
+            stream = stream.filter(report -> report.name().startsWith(name));
+        }
+        if (reportType != null) {
+            stream = stream.filter(report -> report.reportType() == reportType);
+        }
+        return serializeReports(stream.toList());
     }
 
     @RequestMapping(value = "/report/{id}", method = RequestMethod.GET)
