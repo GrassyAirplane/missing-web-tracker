@@ -11,17 +11,24 @@ public interface MissingReport {
 
     long lastSeenEpochMilli();
 
-    GeographicLocation lastKnownLocation();
+    double[] lastKnownLocation();
 
     boolean resolved();
-
-    ReportType reportType();
 
     ReportSourceType reportSourceType();
 
     String name();
 
-    Age age();
+    String appearance();
+
+    String additionalInformation();
+
+    int[] age();
+
+
+    ReportType reportType();
+
+    MissingReportExtension extension();
 
 
 }

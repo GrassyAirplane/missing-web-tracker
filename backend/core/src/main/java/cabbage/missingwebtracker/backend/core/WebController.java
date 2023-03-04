@@ -1,25 +1,16 @@
 package cabbage.missingwebtracker.backend.core;
 
 import cabbage.missingwebtracker.backend.core.database.MemoryMissingReportDatabase;
-import cabbage.missingwebtracker.backend.core.report.MissingReport;
-import cabbage.missingwebtracker.backend.core.report.PersonMissingReportBuilder;
-import cabbage.missingwebtracker.backend.core.report.PetMissingReportBuilder;
-import cabbage.missingwebtracker.backend.core.report.ReportSourceType;
-import cabbage.missingwebtracker.backend.core.report.ReportType;
-import cabbage.missingwebtracker.backend.core.util.Age;
-import cabbage.missingwebtracker.backend.core.util.GeographicLocation;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.json.JsonMapper;
+import cabbage.missingwebtracker.backend.core.report.*;
+import org.spongepowered.configurate.ConfigurateException;
+import org.spongepowered.configurate.ConfigurationNode;
+import org.spongepowered.configurate.jackson.JacksonConfigurationLoader;
 import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseStatus;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import java.io.BufferedWriter;
 import java.io.ByteArrayOutputStream;
+import java.io.OutputStreamWriter;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
@@ -30,39 +21,49 @@ import java.util.stream.Stream;
 @RestController
 public class WebController {
 
-    private static final GeographicLocation MONASH = new GeographicLocation(-37.911450, 145.146440);
+    private static final double[] MONASH = new double[]{-37.911450, 145.146440};
     private final MemoryMissingReportDatabase database = new MemoryMissingReportDatabase();
 
     public WebController() {
         registerDummyReports();
     }
 
-    private static String serializeReport(MissingReport report) {
-        ObjectMapper mapper = new JsonMapper();
+    private static String serializeReport(MissingReportBase report) throws ConfigurateException {
         final ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-        try {
-            mapper.writeValue(outputStream, report);
-        } catch (Exception ex) {
-            throw new IllegalArgumentException(ex);
-        }
+        final BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(outputStream));
+        JacksonConfigurationLoader configurationLoader = JacksonConfigurationLoader.builder()
+                .defaultOptions(options -> options.serializers(serializer -> serializer.register(MissingReportExtension.class, new MissingReportExtensionSerializer())))
+                .sink(() -> writer)
+                .build();
+        ConfigurationNode node = configurationLoader.createNode();
+        node.set(MissingReportBase.class, report);
+        configurationLoader.save(node);
         return outputStream.toString(StandardCharsets.UTF_8);
     }
 
-    private static String serializeReports(List<MissingReport> reports) {
-        ObjectMapper mapper = new JsonMapper();
+    private static String serializeReports(List<MissingReport> reports) throws ConfigurateException {
+
+        final List<MissingReportBase> target = reports.stream().map(MissingReportBase.class::cast).toList();
         final ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-        try {
-            mapper.writeValue(outputStream, reports);
-        } catch (Exception ex) {
-            throw new IllegalArgumentException(ex);
-        }
+        final BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(outputStream));
+        JacksonConfigurationLoader configurationLoader = JacksonConfigurationLoader.builder()
+                .defaultOptions(options -> options.serializers(serializer -> serializer.register(MissingReportExtension.class, new MissingReportExtensionSerializer())))
+                .sink(() -> writer)
+                .build();
+        ConfigurationNode node = configurationLoader.createNode();
+        node.setList(MissingReportBase.class, target);
+        configurationLoader.save(node);
         return outputStream.toString(StandardCharsets.UTF_8);
     }
 
     @RequestMapping("/reports")
     public String allReports() {
         final List<MissingReport> reportList = new ArrayList<>(database.allReports());
-        return serializeReports(reportList);
+        try {
+            return serializeReports(reportList);
+        } catch (ConfigurateException ex) {
+            throw new RuntimeException(ex);
+        }
     }
 
     @RequestMapping(value = "/reports", method = RequestMethod.GET)
@@ -75,7 +76,11 @@ public class WebController {
         if (reportType != null) {
             stream = stream.filter(report -> report.reportType() == reportType);
         }
-        return serializeReports(stream.toList());
+        try {
+            return serializeReports(stream.toList());
+        } catch (ConfigurateException ex) {
+            throw new RuntimeException(ex);
+        }
     }
 
     @RequestMapping(value = "/report/{id}", method = RequestMethod.GET)
@@ -87,38 +92,44 @@ public class WebController {
         if (optionalReport.isEmpty()) {
             return "{}";
         }
-        return serializeReport(optionalReport.get());
+        try {
+            return serializeReport((MissingReportBase) optionalReport.get());
+        } catch (ConfigurateException ex) {
+            throw new RuntimeException(ex);
+        }
     }
 
-    @ExceptionHandler({IllegalArgumentException.class})
+    @ExceptionHandler({RuntimeException.class})
     @ResponseStatus(value = HttpStatus.NOT_FOUND)
-    public String handleException(IllegalArgumentException exception) {
+    public String handleException(RuntimeException exception) {
+        exception.printStackTrace();
         return "{ \"errorMsg\": " + "\"" + exception.getMessage() + "\"" + "}";
     }
 
     private void registerDummyReports() {
-        MissingReport samplePerson = new PersonMissingReportBuilder()
+        MissingReport samplePerson = new MissingReportBaseBuilder()
                 .randomUuid()
                 .name("Andrew W")
+                .reportType(ReportType.PERSON)
                 .reportSourceType(ReportSourceType.USER)
-                .age(new Age(16, 0, 0))
+                .age(new int[]{16, 0})
                 .appearance("161cm, asian")
                 .lastKnownLocation(MONASH)
                 .additionalInformation("n/a")
-                .lastSeen(System.currentTimeMillis())
+                .lastSeenEpochMilli(System.currentTimeMillis())
                 .build();
-        MissingReport samplePet = new PetMissingReportBuilder()
+
+        MissingReport samplePet = new MissingReportBaseBuilder()
                 .randomUuid()
                 .name("Sally")
+                .reportType(ReportType.PET)
                 .reportSourceType(ReportSourceType.USER)
-                .animalType("Dog")
-                .age(new Age(1, 2, 0))
-                .appearance("small doggo")
-                .breed("corgi")
+                .age(new int[]{1, 2})
                 .lastKnownLocation(MONASH)
-                .lastSeen(System.currentTimeMillis())
+                .lastSeenEpochMilli(System.currentTimeMillis())
                 .additionalInformation("sally likes cuddling up to random people")
                 .resolved(true)
+                .extension(new PetExtension("Dog", "Corgi"))
                 .build();
         this.database.submitReport(samplePerson);
         this.database.submitReport(samplePet);
