@@ -11,18 +11,21 @@ import femaleIcon from "../assets/female-svgrepo-com.svg"
 const HumanMarker = (props) => {
     const handleMarkerClick = () => {
         Swal.fire({
-          title: 'Marker Clicked',
+          title: 'Details',
           text: 'You clicked on the marker!',
-          icon: 'success',
+          icon: 'info',
+          html: `<div>Name: ${props.person.name}</div>
+                 <div>Age: ${props.person.age[0]}</div>
+                 <div>Desc: ${props.person.appearance}</div></br>`,
           confirmButtonText: 'OK',
         });
       };
 
     return (
         <>
-            <Marker position={{ lat: props.lat, lng: props.lng }} 
+            <Marker position={{ lat: props.person["last-known-location"][0], lng: props.person["last-known-location"][1] }} 
                 icon={{
-                    url: maleIcon,
+                    url: props.person.extension.gender == "MALE" ? maleIcon : femaleIcon,
                     scaledSize: new window.google.maps.Size(40, 40),
                     }}
                 onClick={handleMarkerClick}/>

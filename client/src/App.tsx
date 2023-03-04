@@ -3,6 +3,7 @@ import reactLogo from './assets/react.svg'
 import Home from './pages/Home'
 import Login from './pages/Login'
 import Card from './components/Card'
+import MapView from './components/MapView'
 import Account from './pages/Account'
 import NavBar from './components/NavBar'
 // import './App.css'
@@ -24,7 +25,7 @@ function App() {
     <div>
       <NavBar />
       <h1>Hello App</h1>
-
+      <MapView latitude={0} longitude={0} />
       {/* <Login /> */}
 
       {/* I'm using flex rn, but grid probably works better. Also, add vertical margin between cards for better ui */}
