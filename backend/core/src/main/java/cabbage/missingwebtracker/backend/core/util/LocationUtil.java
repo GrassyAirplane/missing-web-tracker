@@ -9,6 +9,7 @@ public class LocationUtil {
     public static double calculateDistanceInKilometer(double[] loc1, double[] loc2) {
         return calculateDistanceInKilometer(loc1[0], loc1[1], loc2[0], loc2[1]);
     }
+
     public static double calculateDistanceInKilometer(double userLat, double userLng,
                                                       double venueLat, double venueLng) {
 

@@ -8,9 +8,8 @@ import java.util.regex.Pattern;
 
 public class Utils {
 
-    public static NumberFormat LOCATION_FORMAT = new DecimalFormat("#.###############");
-
     public static final Pattern NUMERIC = Pattern.compile("\\d+");
+    public static NumberFormat LOCATION_FORMAT = new DecimalFormat("#.###############");
 
     public static boolean isInt(String s) {
         return NUMERIC.matcher(s).matches();

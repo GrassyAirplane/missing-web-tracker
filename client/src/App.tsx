@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import Home from './pages/Home'
 import Login from './pages/Login'
+import MapView from './components/MapView'
 import Account from './pages/Account'
 import RootLayout from './layouts/RootLayout'
 import { createBrowserRouter, Route, createRoutesFromElements, RouterProvider } from 'react-router-dom'
@@ -32,9 +33,13 @@ function App() {
   // Change the return statement as you wish, this is only for demo purpose
   return (
     <div>
+
         <div className="App">
             <RouterProvider router={router} />
         </div>
+        
+      <MapView latitude={0} longitude={0} />
+      
     </div>
   )
 }

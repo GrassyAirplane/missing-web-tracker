@@ -31,12 +31,12 @@ const MapView = (prop: Coordinate) => {
     const [markers, setMarkers] = useState([]);
 
     useEffect(() => {
-      fetch("http://localhost:9999/reports?reportType=PERSON")
+      fetch("http://localhost:9999/reports")
         .then(response => response.json())
         .then(data => {
           console.log("reach")
           const newMarkers = data.map((person, index) => (
-            <HumanMarker key={index} lat={person.lastKnownLocation.latitude} lng={person.lastKnownLocation.longitude} />
+            <HumanMarker person={person} />
           ));
           setMarkers(newMarkers);
         })

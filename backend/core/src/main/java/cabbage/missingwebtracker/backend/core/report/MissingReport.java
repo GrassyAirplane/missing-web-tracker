@@ -2,9 +2,7 @@ package cabbage.missingwebtracker.backend.core.report;
 
 import org.spongepowered.configurate.objectmapping.ConfigSerializable;
 import org.spongepowered.configurate.objectmapping.meta.Required;
-import org.spongepowered.configurate.objectmapping.meta.Setting;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
