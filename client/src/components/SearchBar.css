@@ -1,35 +1,39 @@
-.search-bar {
+div.search-bar {
     display: inline-flex;
 }
 
-.search-bar ul {
+div.search-bar ul {
     border: 1px solid #dedede;
     border-radius: 1.7rem;
     box-shadow: 0.1rem 0.1rem 0.3rem 0 #d7d7d7;
-    padding: 0.7rem 0.2rem 0.75rem 1.2rem;
-    width: 25rem;
+    padding: 0.3rem 0rem 0.3rem 1.4rem;
+    width: 25.45rem;
     margin: auto;
     display: inline-block;
 }
 
-.search-bar ul li {
+div.search-bar ul li {
     list-style: none;
     display: inline;
     font-size: 0.99rem;
 }
 
-.search-bar ul li+li:before {
+div.search-bar ul li+li:before {
     content: "|";
     padding: 1rem;
     color: #dedede;
     font-size: 1.3rem;
 }
 
-form {
+div.search-bar ul li.search-bar-btn:hover {
+    cursor: pointer;
+}
+
+div.search-bar ul li form {
     display: inline;
 }
 
-form input {
+div.search-bar ul li form input {
     border: none;
     background-color: inherit;
     font-size: inherit;
@@ -37,17 +41,21 @@ form input {
     margin-right: 0.35rem;
 }
 
-form input:focus {
+div.search-bar ul li form input:focus {
     outline: none;
 }
 
-form button {
+div.search-bar ul li form button {
     border: 1px solid rgb(132, 172, 113);
     border-radius: 50%;
-    width: 2rem;
-    height: 2rem;
+    width: 2.3rem;
+    height: 2.3rem;
     background-color: rgb(132, 172, 113);
     padding: 0.3rem;
     justify-content: center;
     color: #FFF;
+}
+
+div.search-bar ul li form button:hover {
+    background-color: rgb(132, 172, 113);
 }
