@@ -19,13 +19,6 @@ public final class PetMissingReportBuilder {
     private String additionalInformation;
     private boolean resolved;
 
-    private PetMissingReportBuilder() {
-    }
-
-    public static PetMissingReportBuilder aPetMissingReport() {
-        return new PetMissingReportBuilder();
-    }
-
     public PetMissingReportBuilder randomUuid() {
         this.uuid = UUID.randomUUID();
         return this;

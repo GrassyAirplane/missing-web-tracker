@@ -20,13 +20,9 @@ public record GeographicLocation(double longitude, double latitude) {
         return Optional.of(new GeographicLocation(longitude, latitude));
     }
 
-    public String serializeToString() {
-        return Utils.formatLocation(this.longitude) + "," + Utils.formatLocation(this.latitude);
-    }
-
     @Override
     public String toString() {
-        return "(" + Utils.formatLocation(this.longitude) + ", " + Utils.formatLocation(this.latitude) + ")";
+        return Utils.formatLocation(this.longitude) + "," + Utils.formatLocation(this.latitude);
     }
 
 }

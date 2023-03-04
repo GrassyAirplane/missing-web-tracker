@@ -1,29 +1,30 @@
 package cabbage.missingwebtracker.backend.core.report;
 
 import cabbage.missingwebtracker.backend.core.util.ImageStore;
-import cabbage.missingwebtracker.backend.core.util.PropertyStore;
 
 public class ProtoMissingReport {
 
     private final ReportType reportType;
-    private final PropertyStore propertyStore = new PropertyStore();
 
     private final ImageStore imageStore = new ImageStore();
 
-    public ProtoMissingReport(ReportType reportType) {
+    private final MissingReport report;
+
+    public ProtoMissingReport(ReportType reportType, MissingReport report) {
         this.reportType = reportType;
+        this.report = report;
     }
 
     public ReportType reportType() {
         return this.reportType;
     }
 
-    public PropertyStore properties() {
-        return this.propertyStore;
-    }
-
     public ImageStore images() {
         return this.imageStore;
+    }
+
+    public MissingReport report() {
+        return this.report;
     }
 
 }

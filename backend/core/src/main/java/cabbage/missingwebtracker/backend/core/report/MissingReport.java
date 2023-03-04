@@ -18,6 +18,4 @@ public interface MissingReport {
 
     ReportSourceType reportSourceType();
 
-    ProtoMissingReport toProtoReport();
-
 }

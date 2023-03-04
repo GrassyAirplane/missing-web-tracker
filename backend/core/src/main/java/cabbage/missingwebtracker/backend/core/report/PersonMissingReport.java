@@ -15,9 +15,4 @@ public record PersonMissingReport(UUID uuid, String name, Age age, long lastSeen
     public ReportType reportType() {
         return ReportType.PERSON;
     }
-
-    @Override
-    public ProtoMissingReport toProtoReport() {
-        return null;
-    }
 }

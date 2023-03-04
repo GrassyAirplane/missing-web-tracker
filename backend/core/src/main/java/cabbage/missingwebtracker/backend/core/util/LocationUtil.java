@@ -11,7 +11,7 @@ public class LocationUtil {
     }
 
     public static double calculateDistanceInKilometer(double userLat, double userLng,
-                                            double venueLat, double venueLng) {
+                                                      double venueLat, double venueLng) {
 
         double latDistance = Math.toRadians(userLat - venueLat);
         double lngDistance = Math.toRadians(userLng - venueLng);

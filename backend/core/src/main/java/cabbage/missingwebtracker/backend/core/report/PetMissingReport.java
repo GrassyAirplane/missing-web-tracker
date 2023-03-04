@@ -14,8 +14,4 @@ public record PetMissingReport(UUID uuid, String name, Age age, long lastSeenEpo
         return ReportType.PET;
     }
 
-    @Override
-    public ProtoMissingReport toProtoReport() {
-        return null;
-    }
 }
