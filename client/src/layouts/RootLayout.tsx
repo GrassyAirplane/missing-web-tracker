@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from "react-redux";
 import NavBar from "../components/NavBar";
 import { useState } from "react";
 import Footer from '../components/Footer';
+import './RootLayout.css'
 
 const RootLayout = () => {
     const email = localStorage.getItem("email") || "";
@@ -22,7 +23,7 @@ const RootLayout = () => {
 
     return (
         <div>
-            <header>
+            <header className="h-5 main-header-nav">
                 <NavBar />
             </header>
             <Outlet/>

@@ -8,7 +8,7 @@ import { NavLink } from "react-router-dom"
 
 const NavBar = () => {
     return (
-        <header className="p-2 flex items-center">
+        <header className="p-2 flex items-center ">
             <NavLink to="/">
                 <div className="main-header">
                     <img className="logo" src={logo}/>
