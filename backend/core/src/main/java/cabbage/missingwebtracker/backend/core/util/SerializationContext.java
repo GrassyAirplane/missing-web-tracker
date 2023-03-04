@@ -9,6 +9,8 @@ import org.spongepowered.configurate.jackson.FieldValueSeparatorStyle;
 import org.spongepowered.configurate.jackson.JacksonConfigurationLoader;
 import org.spongepowered.configurate.loader.ConfigurationLoader;
 
+import java.io.File;
+import java.nio.file.Path;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -46,6 +48,35 @@ public class SerializationContext {
         node.node("uuid").set(UUID.randomUUID());
         final MissingReport report = node.get(MissingReport.class);
         return Optional.ofNullable(report);
+    }
+
+    /**
+     * Get the working directory based on OS
+     * @return Return the path to the working directory
+     * Taken from https://stackoverflow.com/a/16660314
+     */
+    public static String workingDirectory() {
+        String workingDirectory;
+        //here, we assign the name of the OS, according to Java, to a variable...
+        String OS = (System.getProperty("os.name")).toUpperCase();
+        //to determine what the workingDirectory is.
+        //if it is some version of Windows
+        if (OS.contains("WIN")) {
+            //it is simply the location of the "AppData" folder
+            workingDirectory = System.getenv("AppData");
+        }
+        //Otherwise, we assume Linux or Mac
+        else {
+            //in either case, we would start in the user's home directory
+            workingDirectory = System.getProperty("user.home");
+            //if we are on a Mac, we are not done, we look for "Application Support"
+            workingDirectory += "/Library/Application Support";
+        }
+        return workingDirectory;
+    }
+
+    public static Path dataStore() {
+        return Path.of(workingDirectory()).resolve("missing-web-tracker");
     }
 
 }
