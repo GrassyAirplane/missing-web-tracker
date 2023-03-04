@@ -7,12 +7,12 @@
 header {
     display: flex;
     justify-content: space-around;
-    border-bottom: 1px solid #dedede;
+    padding: 0.5rem 0;
     background-color: #FFF;
-    width: 100vw;
+    width: 100%;
     position: sticky;
     top: 0;
-    height: 100%;
+    /* height: 100%; */
     z-index: 999;
 }
 
@@ -24,6 +24,7 @@ header {
     color: rgb(132, 172, 113);
     margin: auto 0;
     padding: 0 0.7rem;
+    
 }
 
 header button.profile {
@@ -51,6 +52,10 @@ div.main-header {
 
 div.nav-right {
     display: flex;
+}
+
+.login-btn {
+    margin: auto 0;
 }
 
 .login-btn:hover {
