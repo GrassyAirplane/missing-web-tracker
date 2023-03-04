@@ -1,5 +1,5 @@
 {
-  "uuid": "1300eb85-ba1d-42ce-b693-93934ecc7562",
+  "uuid": "90778a3e-053b-414b-81e4-7e401828c27a",
   "name": "Andrew W",
   "appearance": "161cm, asian",
   "additional-information": "n/a",
@@ -7,7 +7,7 @@
     16,
     0
   ],
-  "last-seen-epoch-milli": 1677921389869,
+  "last-seen-epoch-milli": 1677930009714,
   "last-known-location": [
     -37.91145,
     145.14644
@@ -17,5 +17,9 @@
   "report-type": "PERSON",
   "extension": {
     "gender": "MALE"
-  }
+  },
+  "images": [
+    "face.jpg",
+    "full.jpg"
+  ]
 }
