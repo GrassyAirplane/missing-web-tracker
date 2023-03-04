@@ -34,7 +34,6 @@ public class ImageRequestController {
 
     }
     @GetMapping("/report/{id}/images/{fileName}")
-    @Async
     public CompletableFuture<byte[]> getImage(@PathVariable("id") String uuid, @PathVariable("fileName") String fileName) throws IOException {
         return this.imageDatabase.getImage(uuid, fileName);
     }
