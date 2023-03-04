@@ -3,6 +3,7 @@ import reactLogo from './assets/react.svg'
 import Home from './pages/Home'
 import Login from './pages/Login'
 import Card from './components/Card'
+import Account from './pages/Account'
 // import './App.css'
 
 const ex_info = {
@@ -25,7 +26,7 @@ function App() {
       {/* <Login /> */}
 
       {/* I'm using flex rn, but grid probably works better. Also, add vertical margin between cards for better ui */}
-      <div className="flex flex-row flex-wrap p-2 justify-evenly">
+      {/* <div className="flex flex-row flex-wrap p-2 justify-evenly">
         <Card name={ex_info.name} 
           lastKnownLocation={ex_info.lastKnownLocation} 
           appearanceDescription={ex_info.appearanceDescription}
@@ -115,7 +116,9 @@ function App() {
           gender={ex_info.gender}
           imgSrc={ex_info.imgSrc}
         />
-      </div>
+      </div> */}
+
+      <Account />
       
     </div>
   )

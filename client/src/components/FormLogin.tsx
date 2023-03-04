@@ -16,7 +16,7 @@ const FormLogin = (props: FormLoginProps) => {
     const [password, setPassword] = useState<string>("")
 
     const dispatch = useDispatch();
-    const { loggedIn } = useSelector((state: RootState) => state.logger.loggedIn)
+    const loggedIn = useSelector((state: RootState) => state.logger.loggedIn)
 
     console.log(loggedIn)
 
