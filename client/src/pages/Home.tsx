@@ -5,6 +5,7 @@ import { useEffect, useState} from "react"
 import { useSelector } from "react-redux"
 import { RootState } from "../redux/store"
 import Card from "../components/Card"
+import "./Home.css"
 
 const Home = () => {
     const loggedIn = useSelector((state: RootState) => state.logger.loggedIn);
@@ -46,7 +47,7 @@ const Home = () => {
     }, [])
 
     return (
-        <div>
+        <div className="card-section">
             { peopleCards }
             { petCards }
         </div>
