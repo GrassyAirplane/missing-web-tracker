@@ -1,6 +1,6 @@
-import FormLogin from "../components/FormLogin"
+import FormLogin from "../components/FormLogin";
 import FormRegister from "../components/FormRegister";
-import { useState } from "react"
+import { useState } from "react";
 
 const Login = () => {
     const [showRegistrationForm, setShowRegistrationForm] = useState(false);

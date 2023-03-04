@@ -1,5 +1,6 @@
 import { configureStore } from "@reduxjs/toolkit"
 import loginReducer from './loginSlice'
+import modeReducer from './isLookingForPersonSlice'
 
 // export default store = configureStore({
     
@@ -7,7 +8,8 @@ import loginReducer from './loginSlice'
 
 export const store = configureStore({
     reducer: {
-        logger: loginReducer
+        logger: loginReducer,
+        toggler: modeReducer
     }
 })
 
