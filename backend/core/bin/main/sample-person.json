@@ -1,18 +1,21 @@
 {
-  "uuid": "ca91dd34-b178-415d-a2f8-e3c5b579385c",
+  "uuid": "1300eb85-ba1d-42ce-b693-93934ecc7562",
   "name": "Andrew W",
-  "age": {
-    "years": 16,
-    "months": 0,
-    "days": 0
-  },
-  "lastSeenEpochMilli": 1677890559091,
   "appearance": "161cm, asian",
-  "reportSourceType": "USER",
-  "lastKnownLocation": {
-    "longitude": -37.91145,
-    "latitude": 145.14644
-  },
-  "additionalInformation": "n/a",
-  "resolved": false
+  "additional-information": "n/a",
+  "age": [
+    16,
+    0
+  ],
+  "last-seen-epoch-milli": 1677921389869,
+  "last-known-location": [
+    -37.91145,
+    145.14644
+  ],
+  "resolved": false,
+  "report-source-type": "USER",
+  "report-type": "PERSON",
+  "extension": {
+    "gender": "MALE"
+  }
 }

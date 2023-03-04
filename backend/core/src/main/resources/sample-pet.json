@@ -1,21 +1,21 @@
 {
-  "reportType": "PET",
-  "uuid": "8771a2cf-3aa1-48f4-95b1-e0a7902954ae",
+  "uuid": "589de595-4ee4-4ac4-8a38-5ad638ce111a",
   "name": "Sally",
-  "age": {
-    "years": 1,
-    "months": 2,
-    "days": 0
-  },
-  "lastSeenEpochMilli": 1677890953786,
-  "animalType": "Dog",
-  "breed": "corgi",
-  "appearance": "small doggo",
-  "reportSourceType": "USER",
-  "lastKnownLocation": {
-    "longitude": -37.91145,
-    "latitude": 145.14644
-  },
-  "additionalInformation": "sally likes cuddling up to random people",
-  "resolved": true
+  "additional-information": "sally likes cuddling up to random people",
+  "age": [
+    1,
+    2
+  ],
+  "last-seen-epoch-milli": 1677921389870,
+  "last-known-location": [
+    -37.91145,
+    145.14644
+  ],
+  "resolved": true,
+  "report-source-type": "USER",
+  "report-type": "PET",
+  "extension": {
+    "animal-type": "Dog",
+    "breed": "Corgi"
+  }
 }

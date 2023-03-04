@@ -4,6 +4,7 @@ import Home from './pages/Home'
 import Login from './pages/Login'
 import Card from './components/Card'
 import Account from './pages/Account'
+import NavBar from './components/NavBar'
 // import './App.css'
 
 const ex_info = {
@@ -21,6 +22,7 @@ function App() {
   // Change the return statement as you wish, this is only for demo purpose
   return (
     <div>
+      <NavBar />
       <h1>Hello App</h1>
 
       {/* <Login /> */}

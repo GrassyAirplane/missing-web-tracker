@@ -2,6 +2,8 @@ package cabbage.missingwebtracker.backend.core.util;
 
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
+import java.util.Optional;
+import java.util.UUID;
 import java.util.regex.Pattern;
 
 public class Utils {
@@ -16,6 +18,14 @@ public class Utils {
 
     public static String formatLocation(double location) {
         return LOCATION_FORMAT.format(location);
+    }
+
+    public static Optional<UUID> parseUuid(String raw) {
+        try {
+            return Optional.of(UUID.fromString(raw));
+        } catch (IllegalArgumentException ex) {
+            return Optional.empty();
+        }
     }
 
 }

@@ -2,7 +2,6 @@ package cabbage.missingwebtracker.backend.core.database;
 
 import cabbage.missingwebtracker.backend.core.report.MissingReport;
 import cabbage.missingwebtracker.backend.core.report.ReportType;
-import cabbage.missingwebtracker.backend.core.util.GeographicLocation;
 import cabbage.missingwebtracker.backend.core.util.LocationUtil;
 
 import java.util.Collection;
@@ -12,6 +11,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.Map;
+import java.util.Optional;
 import java.util.UUID;
 import java.util.function.Predicate;
 import java.util.stream.Stream;
@@ -27,7 +27,10 @@ public class MemoryMissingReportDatabase {
         }
     }
 
-    public Stream<MissingReport> reportsNear(GeographicLocation location, double radiusKm) {
+    public Optional<MissingReport> findReport(UUID report) {
+        return Optional.ofNullable(this.reportMap.get(report));
+    }
+    public Stream<MissingReport> reportsNear(double[] location, double radiusKm) {
         Predicate<MissingReport> distanceFilter =
                 report -> LocationUtil.calculateDistanceInKilometer(location, report.lastKnownLocation()) <= radiusKm;
         return this.reportMap.values().stream()
