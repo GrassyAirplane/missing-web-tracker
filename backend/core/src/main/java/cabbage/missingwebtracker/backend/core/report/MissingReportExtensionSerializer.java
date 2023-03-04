@@ -20,10 +20,12 @@ public class MissingReportExtensionSerializer implements TypeSerializer<MissingR
             return null;
         }
         ReportType reportType = nodeReportType.get(ReportType.class);
-        if (reportType != ReportType.PET) {
-            return null;
+        if (reportType == ReportType.PET) {
+            return node.get(PetExtension.class);
+        } else if (reportType == ReportType.PERSON) {
+            return node.get(PersonExtension.class);
         }
-        return node.get(PetExtension.class);
+        return null;
     }
 
     @Override

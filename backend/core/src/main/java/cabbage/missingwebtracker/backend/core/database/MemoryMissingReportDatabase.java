@@ -11,6 +11,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.Map;
+import java.util.Optional;
 import java.util.UUID;
 import java.util.function.Predicate;
 import java.util.stream.Stream;
@@ -26,6 +27,9 @@ public class MemoryMissingReportDatabase {
         }
     }
 
+    public Optional<MissingReport> findReport(UUID report) {
+        return Optional.ofNullable(this.reportMap.get(report));
+    }
     public Stream<MissingReport> reportsNear(double[] location, double radiusKm) {
         Predicate<MissingReport> distanceFilter =
                 report -> LocationUtil.calculateDistanceInKilometer(location, report.lastKnownLocation()) <= radiusKm;
