@@ -8,6 +8,7 @@ header {
     display: flex;
     justify-content: space-around;
     border-bottom: 1px solid #dedede;
+    background-color: #FFF;
     width: 100vw;
     position: sticky;
     top: 0;
@@ -22,17 +23,19 @@ header {
     font-size: 1.8rem;
     color: rgb(132, 172, 113);
     margin: auto 0;
+    padding: 0 0.7rem;
 }
 
-header button.login {
+header button.profile {
     display: inline-block;
     border: none;
     background-color: inherit;
     margin: auto 0;
 }
 
-header button.login img {
-    height: 3em;
+header button.profile img {
+    height: 2.7em;
+    width: 2.7em;
     margin-left: 2rem;
 }
 
@@ -48,4 +51,8 @@ div.main-header {
 
 div.nav-right {
     display: flex;
+}
+
+.login-btn:hover {
+    text-decoration: underline;
 }
