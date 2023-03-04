@@ -3,6 +3,7 @@ import { RootState } from "../redux/store";
 import { useSelector, useDispatch } from "react-redux";
 import NavBar from "../components/NavBar";
 import { useState } from "react";
+import Footer from '../components/Footer';
 
 const RootLayout = () => {
     const email = localStorage.getItem("email") || "";
@@ -25,6 +26,9 @@ const RootLayout = () => {
                 <NavBar />
             </header>
             <Outlet/>
+            <footer>
+                <Footer/>
+            </footer>
         </div>
     );
 }
