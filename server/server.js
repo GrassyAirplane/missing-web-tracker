@@ -1,5 +1,9 @@
 const express = require("express");
+const cors = require('cors');
 const app = express();
+const bodyParser = require('body-parser');
+const multer = require('multer');
+const upload = multer();
 
 const PORT = 8080;
 
@@ -12,9 +16,14 @@ app.use(
         "http://127.0.0.1:5174",
         "http://localhost:5173",
         "http://127.0.0.1:9545/",
+        "http://localhost:5173/%27",
       ],
     })
 );
+
+// parse application/json requests
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use((req, res, next) => {
   res.setHeader('Access-Control-Allow-Origin', 'http://localhost:5173/%27');
@@ -26,6 +35,9 @@ app.listen(
     () => console.log(`it's alive on ${PORT}`)
 )
 
+app.get('/users', (req, res) => {
+  res.send(JSON.stringify(user_database))
+})
 
 // Get user info
 app.get('/user/:email', (req, res) => {
@@ -66,7 +78,7 @@ app.post('/user/missing_pets', (req, res) => {
 })
 
 // Login
-app.post('/login', (req, res) => {
+app.post('/login', upload.none(), (req, res) => {
   const email = req.body.email;
   const password = req.body.password;
 
@@ -77,10 +89,12 @@ app.post('/login', (req, res) => {
 })
 
 // Register a new user
-app.post('/register', (req, res) => {
+app.post('/register', upload.none(), (req, res) => {
+
   const email = req.body.email;
   const username = req.body.username;
   const password = req.body.password;
+  console.log(email)
 
   if (user_database.hasOwnProperty(email)) {
     console.log("The user is already registered");
@@ -91,8 +105,9 @@ app.post('/register', (req, res) => {
       missing_people: [],
       missing_pets: []
     }
+    console.log("successful")
   }
-  res.status(200).send("Registration successful");
+  res.status(200)
 })
 
 
