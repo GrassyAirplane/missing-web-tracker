@@ -7,12 +7,6 @@
 Business logic of the backend; for example, database of missing pets
 NOTE: This module cannot be launched as an executable
 
-### Api
-
-Network api of the backend, containing the webserver which serves to broker
-access to the "Core" business logic of the application
-NOTE: This module should be launched as an executable
-
 ## Required Dependencies
 
 - JDK 17
@@ -21,6 +15,6 @@ NOTE: This module should be launched as an executable
 
 1. Compile the project
     * Run `./gradlew build`
-    * The file runnable jar is at `api/build/libs/api-0.0.1-SNAPSHOT.jar`
+    * The file runnable jar is at `core/build/libs/api-0.0.1-SNAPSHOT.jar`
 2. Run the project
-    * Run `java -jar api-0.0.1-SNAPSHOT.jar`
+    * Run `java -jar core-0.0.1-SNAPSHOT.jar`
