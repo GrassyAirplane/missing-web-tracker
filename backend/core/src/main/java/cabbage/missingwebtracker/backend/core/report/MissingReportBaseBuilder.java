@@ -84,7 +84,7 @@ public final class MissingReportBaseBuilder {
         return this;
     }
 
-    public MissingReportBase build() {
-        return new MissingReportBase(uuid, name, appearance, additionalInformation, age, lastSeenEpochMilli, lastKnownLocation, resolved, reportSourceType, reportType, extension, images);
+    public MissingReport build() {
+        return new MissingReport(uuid, name, appearance, additionalInformation, age, lastSeenEpochMilli, lastKnownLocation, resolved, reportSourceType, reportType, extension, images);
     }
 }

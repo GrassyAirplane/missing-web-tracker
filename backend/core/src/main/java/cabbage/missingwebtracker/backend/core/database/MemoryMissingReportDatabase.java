@@ -28,7 +28,7 @@ public class MemoryMissingReportDatabase {
 
     public Stream<MissingReport> reportsNear(double[] location, double radiusKm) {
         Predicate<MissingReport> distanceFilter =
-                report -> LocationUtil.calculateDistanceInKilometer(location[0], location[1], report.lastKnownLocation()[0], report.lastKnownLocation()[1]) <= radiusKm;
+                report -> LocationUtil.calculateDistanceInKilometer(location, report.lastKnownLocation()) <= radiusKm;
         return this.reportMap.values().stream()
                 .filter(distanceFilter);
     }
