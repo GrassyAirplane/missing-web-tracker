@@ -20,14 +20,14 @@
 
 const Card = (props) => {
     return (
-        <div className="card bg-slate-50 rounded-3xl max-w-xs" onClick={props.handleClick}>
+        <div style={{ backgroundColor: '#F3F4F6' }} className="card rounded-3xl max-w-xs cursor-pointer" onClick={props.handleClick}>
             {/* The div below ensures that the card holds its shape even before the img loads */}
-            <div className="w-80 h-80 bg-slate-200 missing-img">
+            <div className="w-80 h-80 bg-white missing-img">
                 <img src={props.imgSrc} alt="" className="min-w-xs min-h-xs missing-img"/>
             </div>
-            <div className="p-3">
-                <h1 className="font-bold flex text-lg">
-                    {props.name} &nbsp; {props.age ? <p>({props.age})</p> : null }, &nbsp; {props.gender ? <p>{props.gender}</p> : null }
+            <div style={{ backgroundColor: '#FFFFFF' }} className="p-3">
+                <h1 className="font-bold text-lg">
+                    {props.name} {props.age ? <span>({props.age})</span> : null }, {props.gender ? <span>{props.gender}</span> : null }
                 </h1>
                 <div className="missing-entity-info">
                     <p>{props.animal} {props.breed}</p>
