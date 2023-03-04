@@ -1,0 +1,21 @@
+{
+  "reportType": "PET",
+  "uuid": "8771a2cf-3aa1-48f4-95b1-e0a7902954ae",
+  "name": "Sally",
+  "age": {
+    "years": 1,
+    "months": 2,
+    "days": 0
+  },
+  "lastSeenEpochMilli": 1677890953786,
+  "animalType": "Dog",
+  "breed": "corgi",
+  "appearance": "small doggo",
+  "reportSourceType": "USER",
+  "lastKnownLocation": {
+    "longitude": -37.91145,
+    "latitude": 145.14644
+  },
+  "additionalInformation": "sally likes cuddling up to random people",
+  "resolved": true
+}
