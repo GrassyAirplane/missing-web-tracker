@@ -1,6 +1,7 @@
 package cabbage.missingwebtracker.backend.core.database;
 
 
+import cabbage.missingwebtracker.backend.core.util.SerializationContext;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
@@ -16,7 +17,14 @@ import java.util.concurrent.ForkJoinPool;
 
 public class ImageDatabase {
 
-    private final Path dataStore = new File(System.getenv("LOCALAPPDATA")).toPath();
+    private final Path dataStore = SerializationContext.dataStore();
+
+    public ImageDatabase() {
+        File file = dataStore.toFile();
+        if (!file.isDirectory()) {
+            file.mkdirs();
+        }
+    }
 
     public void submitImage(String uuid, String fileName, MultipartFile file) {
         File filePath = dataStore.resolve(uuid).resolve(fileName).toFile();

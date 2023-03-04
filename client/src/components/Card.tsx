@@ -20,7 +20,7 @@ interface CardProps {
 
 const Card = (props: CardProps) => {
     return (
-        <div className="card bg-slate-50 rounded-3xl shadow max-w-xs" onClick={props.handleClick}>
+        <div className="card bg-slate-50 rounded-3xl max-w-xs" onClick={props.handleClick}>
             {/* The div below ensures that the card holds its shape even before the img loads */}
             <div className="w-80 h-80 bg-slate-200 missing-img">
                 <img src={props.imgSrc} alt="" className="min-w-xs min-h-xs missing-img"/>

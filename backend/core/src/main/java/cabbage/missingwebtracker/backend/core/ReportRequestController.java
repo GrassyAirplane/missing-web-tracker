@@ -8,6 +8,7 @@ import cabbage.missingwebtracker.backend.core.util.LocationUtil;
 import cabbage.missingwebtracker.backend.core.util.SerializationContext;
 import cabbage.missingwebtracker.backend.core.util.Utils;
 import org.spongepowered.configurate.ConfigurateException;
+import org.spongepowered.configurate.ConfigurationNode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -20,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.io.IOException;
 import java.util.Optional;
 import java.util.UUID;
 import java.util.stream.Stream;
@@ -115,6 +117,32 @@ public class ReportRequestController {
         }
         this.imageDatabase.deleteImages(uuid);
         this.reportDatabase.removeReport(optionalUuid.get());
+    }
+
+    @PutMapping("/reports/modify")
+    public boolean modifyReport(String json) throws IOException {
+        ConfigurationNode node = SerializationContext.newBuilder().buildAndLoadString(json);
+        final UUID uuid = node.get(UUID.class);
+        if (uuid == null) {
+            return false;
+        }
+        Optional<MissingReport> optionalReport = this.reportDatabase.findReport(uuid);
+        if (optionalReport.isEmpty()) {
+            return false;
+        }
+        MissingReport existing = optionalReport.get();
+        ConfigurationNode serialized = SerializationContext.newNode();
+        serialized.set(existing);
+        node.removeChild("uuid");
+        node.removeChild("images");
+        // load new data
+        serialized.from(node);
+        MissingReport mergedReport = serialized.get(MissingReport.class);
+        if (mergedReport != null) {
+            this.reportDatabase.submitReport(mergedReport);
+            return true;
+        }
+        return false;
     }
 
     @ExceptionHandler({RuntimeException.class})
