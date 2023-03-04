@@ -55,9 +55,18 @@ const MapView = (prop: Coordinate) => {
         borderRadius: "20px",
     };
 
+    const bounds = {
+      north: 41.390205,
+      south: 41.327423,
+      east: 2.228215,
+      west: 2.088889,
+    };
+
     const options = {
         disableDefaultUI: true,
         zoomControl: true,
+        bounds: bounds,
+        minZoom: 2,
         styles: [
         {
             featureType: "poi",
@@ -144,6 +153,8 @@ const MapView = (prop: Coordinate) => {
                 }}
                 style={{ 
                     boxShadow: "0px 2px 4px rgba(0, 0, 0, 0.25)",
+                    padding: "0.5rem",
+                    borderRadius: "30px"
                 }}>Center</button>
                 </div>
             </div>
