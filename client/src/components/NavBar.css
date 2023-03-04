@@ -1,0 +1,51 @@
+* {
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    display: flex;
+    justify-content: space-around;
+    border-bottom: 1px solid #dedede;
+    width: 100vw;
+    position: sticky;
+    top: 0;
+    height: 100%;
+    z-index: 999;
+}
+
+h1 {
+    text-transform: lowercase;
+    display: inline-block;
+    font-weight: 700;
+    font-size: 1.8rem;
+    color: rgb(132, 172, 113);
+    margin: auto 0;
+}
+
+header button.login {
+    display: inline-block;
+    border: none;
+    background-color: inherit;
+    margin: auto 0;
+}
+
+header button.login img {
+    height: 3em;
+    margin-left: 2rem;
+}
+
+.logo {
+    height: 3em;
+    display: inline-block;
+    margin: 0;
+}
+
+div.main-header {
+    display: flex;
+}
+
+div.nav-right {
+    display: flex;
+}
