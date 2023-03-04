@@ -25,7 +25,7 @@ import java.util.UUID;
 import java.util.stream.Stream;
 
 @RestController
-@CrossOrigin(origins = "http://localhost:8080")
+@CrossOrigin(origins = {"http://localhost:8080", "http://localhost:5173"})
 public class ReportRequestController {
 
     @Autowired
