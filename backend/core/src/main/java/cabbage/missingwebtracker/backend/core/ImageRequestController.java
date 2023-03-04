@@ -6,7 +6,6 @@ import cabbage.missingwebtracker.backend.core.database.MemoryMissingReportDataba
 import cabbage.missingwebtracker.backend.core.report.MissingReport;
 import cabbage.missingwebtracker.backend.core.util.Utils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.scheduling.annotation.Async;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -33,6 +32,7 @@ public class ImageRequestController {
     public ImageRequestController() {
 
     }
+
     @GetMapping("/report/{id}/images/{fileName}")
     public CompletableFuture<byte[]> getImage(@PathVariable("id") String uuid, @PathVariable("fileName") String fileName) throws IOException {
         return this.imageDatabase.getImage(uuid, fileName);

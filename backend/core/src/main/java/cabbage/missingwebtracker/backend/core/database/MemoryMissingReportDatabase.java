@@ -30,6 +30,7 @@ public class MemoryMissingReportDatabase {
     public Optional<MissingReport> findReport(UUID report) {
         return Optional.ofNullable(this.reportMap.get(report));
     }
+
     public Stream<MissingReport> reportsNear(double[] location, double radiusKm) {
         Predicate<MissingReport> distanceFilter =
                 report -> LocationUtil.calculateDistanceInKilometer(location, report.lastKnownLocation()) <= radiusKm;

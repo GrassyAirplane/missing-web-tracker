@@ -9,7 +9,6 @@ import org.spongepowered.configurate.jackson.FieldValueSeparatorStyle;
 import org.spongepowered.configurate.jackson.JacksonConfigurationLoader;
 import org.spongepowered.configurate.loader.ConfigurationLoader;
 
-import java.io.File;
 import java.nio.file.Path;
 import java.util.List;
 import java.util.Optional;
@@ -52,6 +51,7 @@ public class SerializationContext {
 
     /**
      * Get the working directory based on OS
+     *
      * @return Return the path to the working directory
      * Taken from https://stackoverflow.com/a/16660314
      */
