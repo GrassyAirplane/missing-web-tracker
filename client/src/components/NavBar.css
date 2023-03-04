@@ -15,7 +15,7 @@ header {
     z-index: 999;
 }
 
-h1 {
+.main-header > h1 {
     text-transform: lowercase;
     display: inline-block;
     font-weight: 700;

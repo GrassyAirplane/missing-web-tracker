@@ -16,6 +16,11 @@ app.use(
     })
 );
 
+app.use((req, res, next) => {
+  res.setHeader('Access-Control-Allow-Origin', 'http://localhost:5173/%27');
+  next();
+});
+
 app.listen(
     PORT,
     () => console.log(`it's alive on ${PORT}`)
@@ -89,4 +94,24 @@ app.post('/register', (req, res) => {
   }
   res.status(200).send("Registration successful");
 })
+
+
+app.use((req, res, next) => {
+  res.setHeader('Access-Control-Allow-Origin', 'http://localhost:5173');
+  next();
+});
+
+app.get('/reports', async (req, res) => {
+  const reportType = req.query.reportType;
+  const uuid = req.body.uuid;
+  const url = `http://localhost:9999/reports`; //?reportType=PERSON
+
+  try {
+    const response = await axios.get(url);
+    res.json(response.data);
+  } catch (error) {
+    console.error(error);
+    res.status(500).send('Internal Server Error');
+  }
+});
 
