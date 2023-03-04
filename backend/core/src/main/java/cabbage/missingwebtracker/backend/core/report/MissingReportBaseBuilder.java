@@ -1,5 +1,6 @@
 package cabbage.missingwebtracker.backend.core.report;
 
+import java.util.List;
 import java.util.UUID;
 
 public final class MissingReportBaseBuilder {
@@ -16,10 +17,13 @@ public final class MissingReportBaseBuilder {
     private ReportType reportType;
     private MissingReportExtension extension;
 
+    private List<String> images;
+
     public MissingReportBaseBuilder randomUuid() {
         this.uuid = UUID.randomUUID();
         return this;
     }
+
     public MissingReportBaseBuilder uuid(UUID uuid) {
         this.uuid = uuid;
         return this;
@@ -75,7 +79,12 @@ public final class MissingReportBaseBuilder {
         return this;
     }
 
+    public MissingReportBaseBuilder images(List<String> images) {
+        this.images = images;
+        return this;
+    }
+
     public MissingReportBase build() {
-        return new MissingReportBase(uuid, name, appearance, additionalInformation, age, lastSeenEpochMilli, lastKnownLocation, resolved, reportSourceType, reportType, extension);
+        return new MissingReportBase(uuid, name, appearance, additionalInformation, age, lastSeenEpochMilli, lastKnownLocation, resolved, reportSourceType, reportType, extension, images);
     }
 }

@@ -6,10 +6,6 @@ package cabbage.missingwebtracker.backend.core.util;
 public class LocationUtil {
     public static final double AVERAGE_RADIUS_OF_EARTH_KM = 6371;
 
-    public static double calculateDistanceInKilometer(GeographicLocation loc1, GeographicLocation loc2) {
-        return calculateDistanceInKilometer(loc1.latitude(), loc1.longitude(), loc2.latitude(), loc2.longitude());
-    }
-
     public static double calculateDistanceInKilometer(double userLat, double userLng,
                                                       double venueLat, double venueLng) {
 

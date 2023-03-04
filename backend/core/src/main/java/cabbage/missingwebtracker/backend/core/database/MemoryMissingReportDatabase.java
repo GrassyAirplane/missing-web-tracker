@@ -2,7 +2,6 @@ package cabbage.missingwebtracker.backend.core.database;
 
 import cabbage.missingwebtracker.backend.core.report.MissingReport;
 import cabbage.missingwebtracker.backend.core.report.ReportType;
-import cabbage.missingwebtracker.backend.core.util.GeographicLocation;
 import cabbage.missingwebtracker.backend.core.util.LocationUtil;
 
 import java.util.Collection;

@@ -1,8 +1,6 @@
 package cabbage.missingwebtracker.backend.core.report;
 
-import cabbage.missingwebtracker.backend.core.util.Age;
-import cabbage.missingwebtracker.backend.core.util.GeographicLocation;
-
+import java.util.List;
 import java.util.UUID;
 
 public interface MissingReport {
@@ -25,10 +23,11 @@ public interface MissingReport {
 
     int[] age();
 
-
     ReportType reportType();
 
     MissingReportExtension extension();
+
+    List<String> images();
 
 
 }

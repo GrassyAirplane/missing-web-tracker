@@ -2,6 +2,7 @@ package cabbage.missingwebtracker.backend.core.report;
 
 import org.spongepowered.configurate.objectmapping.ConfigSerializable;
 
+import java.util.List;
 import java.util.UUID;
 
 @ConfigSerializable
@@ -15,6 +16,7 @@ public record MissingReportBase(UUID uuid,
                                 boolean resolved,
                                 ReportSourceType reportSourceType,
                                 ReportType reportType,
-                                MissingReportExtension extension)
+                                MissingReportExtension extension,
+                                List<String> images)
         implements MissingReport {
 }

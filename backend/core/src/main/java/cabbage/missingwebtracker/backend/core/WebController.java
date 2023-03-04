@@ -2,6 +2,7 @@ package cabbage.missingwebtracker.backend.core;
 
 import cabbage.missingwebtracker.backend.core.database.MemoryMissingReportDatabase;
 import cabbage.missingwebtracker.backend.core.report.*;
+import cabbage.missingwebtracker.backend.core.util.Gender;
 import org.spongepowered.configurate.ConfigurateException;
 import org.spongepowered.configurate.ConfigurationNode;
 import org.spongepowered.configurate.jackson.JacksonConfigurationLoader;
@@ -32,7 +33,7 @@ public class WebController {
         final ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
         final BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(outputStream));
         JacksonConfigurationLoader configurationLoader = JacksonConfigurationLoader.builder()
-                .defaultOptions(options -> options.serializers(serializer -> serializer.register(MissingReportExtension.class, new MissingReportExtensionSerializer())))
+                .defaultOptions(options -> options.serializers(serializer -> serializer.registerExact(MissingReportExtension.class, new MissingReportExtensionSerializer())))
                 .sink(() -> writer)
                 .build();
         ConfigurationNode node = configurationLoader.createNode();
@@ -47,7 +48,7 @@ public class WebController {
         final ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
         final BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(outputStream));
         JacksonConfigurationLoader configurationLoader = JacksonConfigurationLoader.builder()
-                .defaultOptions(options -> options.serializers(serializer -> serializer.register(MissingReportExtension.class, new MissingReportExtensionSerializer())))
+                .defaultOptions(options -> options.serializers(serializer -> serializer.registerExact(MissingReportExtension.class, new MissingReportExtensionSerializer())))
                 .sink(() -> writer)
                 .build();
         ConfigurationNode node = configurationLoader.createNode();
@@ -117,6 +118,7 @@ public class WebController {
                 .lastKnownLocation(MONASH)
                 .additionalInformation("n/a")
                 .lastSeenEpochMilli(System.currentTimeMillis())
+                .extension(new PersonExtension(Gender.MALE))
                 .build();
 
         MissingReport samplePet = new MissingReportBaseBuilder()

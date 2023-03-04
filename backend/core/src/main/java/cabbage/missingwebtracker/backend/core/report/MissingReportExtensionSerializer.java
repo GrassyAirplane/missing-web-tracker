@@ -29,7 +29,9 @@ public class MissingReportExtensionSerializer implements TypeSerializer<MissingR
     @Override
     public void serialize(Type type, @Nullable MissingReportExtension obj, ConfigurationNode node) throws SerializationException {
         if (obj instanceof PetExtension petExtension) {
-           node.set()
+            node.set(PetExtension.class, petExtension);
+        } else if (obj instanceof PersonExtension personExtension) {
+            node.set(PersonExtension.class, personExtension);
         }
     }
 }
