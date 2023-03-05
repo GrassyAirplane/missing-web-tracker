@@ -50,8 +50,8 @@ const MapView = (prop: Coordinate) => {
     });
 
     const mapContainerStyle = {
-        width: "90vw",
-        height: "400px",
+        width: "80vw",
+        height: "80vh",
         borderRadius: "20px",
     };
 
@@ -125,7 +125,7 @@ const MapView = (prop: Coordinate) => {
         <div>
           {loadError && <div>Map cannot be loaded right now, sorry.</div>}
           {isLoaded && (
-            <div style={{ position: "relative"}}>
+            <div style={{ position: "relative", marginTop: "3.25rem"}}>
                 <GoogleMap
                     mapContainerStyle={mapContainerStyle}
                     center={center}
@@ -152,9 +152,17 @@ const MapView = (prop: Coordinate) => {
                     map.setZoom(14);
                 }}
                 style={{ 
-                    boxShadow: "0px 2px 4px rgba(0, 0, 0, 0.25)",
-                    padding: "0.5rem",
-                    borderRadius: "30px"
+                    // boxShadow: "0px 2px 4px rgba(0, 0, 0, 0.25)",
+                    // padding: "0.5rem",
+                    // borderRadius: "30px",
+                    color: "#FFF",
+                    border: "1px solid rgb(132, 172, 113)",
+                    backgroundColor: "rgb(132, 172, 113)",
+                    padding: "0.5rem 1rem",
+                    fontWeight: 700,
+                    fontSize: "0.9rem",
+                    textTransform: "uppercase",
+                    marginBottom: "1rem",
                 }}>Center</button>
                 </div>
             </div>

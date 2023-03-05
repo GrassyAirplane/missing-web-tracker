@@ -2,6 +2,7 @@ import { useState } from 'react'
 import Home from './pages/Home'
 import Login from './pages/Login'
 import MapView from './components/MapView'
+import MapPage from './components/MapPage'
 import Account from './pages/Account'
 import RootLayout from './layouts/RootLayout'
 import { createBrowserRouter, Route, createRoutesFromElements, RouterProvider } from 'react-router-dom'
@@ -24,6 +25,7 @@ const router = createBrowserRouter(
       <Route path="login" element={<Login />}/>
       <Route path="account" element={<Account />}/>
       <Route path="login" element={<Login />}/>
+      <Route path="map" element={<MapPage/>}/>
     </Route>), {
       basename: ""
     }
