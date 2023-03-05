@@ -114,9 +114,7 @@ const FormLogin = (props: FormLoginProps) => {
                             </div>
                             <form name="signin" className="form" onSubmit={handleLoginSubmit}>
                                 <div className="input-control input-field">
-                                <label htmlFor="email" className="input-label" hidden>
-                                    Email Address
-                                </label>
+
                                 <input
                                     type="email"
                                     name="email"
@@ -128,9 +126,7 @@ const FormLogin = (props: FormLoginProps) => {
                                 />
                                 </div>
                                 <div className="input-control input-field">
-                                <label htmlFor="password" className="input-label" hidden>
-                                    Password
-                                </label>
+
                                 <input
                                     type="password"
                                     name="password"

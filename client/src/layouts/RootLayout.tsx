@@ -23,7 +23,7 @@ const RootLayout = () => {
 
     return (
         <div>
-            <header className="h-5 main-header-nav">
+            <header className="main-header-nav">
                 <NavBar />
             </header>
             <Outlet/>
