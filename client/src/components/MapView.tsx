@@ -38,7 +38,7 @@ const MapView = (prop: Coordinate) => {
     var targetUrl = "http://" + window.location.host;
 
     useEffect(() => {
-      fetch(targetUrl + '/reports')
+      fetch(targetUrl + ':9999/reports')
         .then(response => response.json())
         .then(data => {
           console.log("reach")

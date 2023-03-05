@@ -17,7 +17,7 @@ const Home = () => {
     var targetUrl = "http://" + window.location.host;
 
     useEffect(() => {
-      fetch(targetUrl + "/reports?reportType=PERSON")
+      fetch(targetUrl + ":9999/reports?reportType=PERSON")
         .then(response => response.json())
         .then(data => {
           console.log("reach")
@@ -30,7 +30,7 @@ const Home = () => {
     }, []);
 
     useEffect(() => {
-        fetch(targetUrl + "/reports?reportType=PET")
+        fetch(targetUrl + ":9999/reports?reportType=PET")
           .then(response => response.json())
           .then(data => {
             console.log("reach")

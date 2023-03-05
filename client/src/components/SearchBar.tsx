@@ -46,7 +46,7 @@ const SearchBar = () => {
                 gender,
                 "report-source-type": reportSourceType
               };
-              fetch(targetUrl + '/reports', {
+              fetch(targetUrl + ':9999/reports', {
                 method: 'POST',
                 body: JSON.stringify(formData),
                 headers: {
@@ -112,7 +112,7 @@ const SearchBar = () => {
                     "pet-breed": petBreed,
                     "report-source-type": reportSourceType
                   };
-                  fetch(targetUrl + '/reports', {
+                  fetch(targetUrl + ':9999/reports', {
                     method: 'POST',
                     body: JSON.stringify(formData),
                     headers: {
