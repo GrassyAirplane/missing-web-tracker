@@ -16,8 +16,10 @@ const Home = () => {
     const [peopleCards, setPeopleCards] = useState([]);
     const [petCards, setPetCards] = useState([]);
 
+    targetUrl = window.location.origin;
+
     useEffect(() => {
-      fetch("http://localhost:9999/reports?reportType=PERSON")
+      fetch(targetUrl + "/reports?reportType=PERSON")
         .then(response => response.json())
         .then(data => {
           console.log("reach")
@@ -30,7 +32,7 @@ const Home = () => {
     }, []);
 
     useEffect(() => {
-        fetch("http://localhost:9999/reports?reportType=PET")
+        fetch(targetUrl + "/reports?reportType=PET")
           .then(response => response.json())
           .then(data => {
             console.log("reach")
