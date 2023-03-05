@@ -8,6 +8,7 @@ const Footer = () => {
                 <span className="made-with">Made with</span>
                 <ul className="made-with">
                     <li>Google Map API</li>
+                    <li>React</li>
                     <li>Sweet Alert</li>
                     <li>Spring Boot</li>
                 </ul>
