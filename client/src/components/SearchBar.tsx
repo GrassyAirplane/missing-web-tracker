@@ -7,7 +7,7 @@ import { RootState } from '../redux/store';
 
 const SearchBar = () => {
 
-    var targetUrl = window.location.origin
+    var targetUrl = "http://" + window.location.host;
 
     const [interestLocation, setinterestLocation] = useState<google.maps.LatLngLiteral | null>(null);
     const isLookingForPerson = useSelector((state: RootState) => state.toggler.isLookingForPerson);

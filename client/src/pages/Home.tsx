@@ -10,15 +10,11 @@ import "./Home.css"
 const Home = () => {
     const loggedIn = useSelector((state: RootState) => state.logger.loggedIn);
     const isLookingForPerson = useSelector((state: RootState) => state.toggler.isLookingForPerson);
-      
-    const url = "http://localhost:8080/reports"
 
     const [peopleCards, setPeopleCards] = useState([]);
     const [petCards, setPetCards] = useState([]);
 
-    var targetUrl = window.location.origin;
-
-    console.log(targetUrl)
+    var targetUrl = "http://" + window.location.host;
 
     useEffect(() => {
       fetch(targetUrl + "/reports?reportType=PERSON")

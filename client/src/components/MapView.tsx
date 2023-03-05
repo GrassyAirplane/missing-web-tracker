@@ -35,10 +35,10 @@ const MapView = (prop: Coordinate) => {
     const lati = parseFloat(new URLSearchParams(location.search).get('lat'));
     const long = parseFloat(new URLSearchParams(location.search).get('lng'));
 
-    var targetEndpoint = window.location.origin + "/reports"
+    var targetUrl = "http://" + window.location.host;
 
     useEffect(() => {
-      fetch(targetEndpoint)
+      fetch(targetUrl + '/reports')
         .then(response => response.json())
         .then(data => {
           console.log("reach")
