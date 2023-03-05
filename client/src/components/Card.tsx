@@ -67,6 +67,7 @@ const Card = (props) => {
           html: `<div>Name: ${props.person.name}</div>
                  <div>Age: ${props.person.age[0]}</div>
                  <div>Desc: ${props.person.appearance}</div>
+                 <div>Last Seen: ${formattedDate} </div>
                  <div>Dist: ${distance} KM away</div>`,
           cancelButtonText: 'OK',
           showCancelButton: true,
@@ -83,6 +84,10 @@ const Card = (props) => {
     const deg2rad = (deg) => {
         return deg * (Math.PI/180);
     };
+
+    const lastSeenEpoch = props.person["last-seen-epoch-milli"];
+    const lastSeenDate = new Date(lastSeenEpoch);
+    const formattedDate = lastSeenDate.toLocaleDateString();
 
     return (
         <div className="card-container">
@@ -105,7 +110,7 @@ const Card = (props) => {
                     ? props.person.age[0]
                     : props.person.age[1]}
             </p> */}
-            <p className="last-seen">{props.person.lastSeen}</p>
+            <p className="last-seen">{formattedDate}</p>
             {distance !== null && (
                 <p className="distance">{distance} KM away</p>
             )}
