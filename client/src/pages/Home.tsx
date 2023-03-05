@@ -9,6 +9,8 @@ import "./Home.css"
 
 const Home = () => {
     const loggedIn = useSelector((state: RootState) => state.logger.loggedIn);
+    const isLookingForPerson = useSelector((state: RootState) => state.toggler.isLookingForPerson);
+      
     const url = "http://localhost:8080/reports"
 
     const [peopleCards, setPeopleCards] = useState([]);
@@ -48,8 +50,7 @@ const Home = () => {
 
     return (
         <div className="card-section">
-            { peopleCards }
-            { petCards }
+            {isLookingForPerson ? petCards : peopleCards}
         </div>
     )
 }

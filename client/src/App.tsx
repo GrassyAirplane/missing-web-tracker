@@ -33,13 +33,9 @@ function App() {
   // Change the return statement as you wish, this is only for demo purpose
   return (
     <div>
-
         <div className="App">
             <RouterProvider router={router} />
         </div>
-        
-      <MapView latitude={0} longitude={0} />
-      
     </div>
   )
 }

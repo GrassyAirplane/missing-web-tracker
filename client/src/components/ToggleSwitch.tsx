@@ -9,6 +9,10 @@ const ToggleSwitch = () => {
     const isLookingForPerson = useSelector((state: RootState) => state.toggler.isLookingForPerson);
     const dispatch = useDispatch();
 
+    console.log("STATE")
+    console.log(isLookingForPerson)
+    console.log("STATE")
+
     useEffect(() => {
         console.log(isLookingForPerson)
     }, [isLookingForPerson])
