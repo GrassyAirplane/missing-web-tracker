@@ -16,8 +16,11 @@ import java.util.Random;
 
 @Controller
 public class ExampleController {
-    private static final double[] MAX = new double[]{-37.564340, 145.429444};
-    private static final double[] MIN = new double[]{-38.126187, 144.397366};
+
+    private static final double[] GLOBAL = new double[]{-180, 180};
+
+    private static final double[] MAX_MELB = new double[]{-37.564340, 145.429444};
+    private static final double[] MIN_MELB = new double[]{-38.126187, 144.397366};
 
     @Autowired
     public ExampleController(MemoryMissingReportDatabase reportDatabase) {
@@ -25,14 +28,15 @@ public class ExampleController {
     }
 
     public double[] generateRandomCoordinates(Random random) {
-        final double lat = random.nextDouble(MIN[0], MAX[0]);
-        final double lng = random.nextDouble(MIN[1], MAX[1]);
+        final double lat = random.nextDouble(GLOBAL[0], GLOBAL[1]);
+        final double lng = random.nextDouble(GLOBAL[0], GLOBAL[1]);
         return new double[]{lat, lng};
     }
 
     public void registerExamples(MemoryMissingReportDatabase reportDatabase) {
         Random random = new Random();
         for (int i = 0; i < 10; i++) {
+            boolean male = random.nextBoolean();
             MissingReport samplePerson = new MissingReportBaseBuilder()
                     .randomUuid()
                     .name("Andrew")
@@ -44,7 +48,7 @@ public class ExampleController {
                     .additionalInformation("n/a")
                     .lastSeenEpochMilli(System.currentTimeMillis())
                     .images(Arrays.asList("face.jpg", "full.jpg"))
-                    .extension(new PersonExtension(Gender.MALE))
+                    .extension(new PersonExtension(male ? Gender.MALE : Gender.FEMALE))
                     .build();
 
             MissingReport samplePet = new MissingReportBaseBuilder()
