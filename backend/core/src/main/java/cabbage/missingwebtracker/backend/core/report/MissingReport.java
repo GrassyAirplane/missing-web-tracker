@@ -15,6 +15,7 @@ public record MissingReport(UUID uuid,
                             int[] age,
                             @Required
                             long lastSeenEpochMilli,
+                            @Required
                             double[] lastKnownLocation,
                             boolean resolved,
                             @Required
