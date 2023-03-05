@@ -7,10 +7,12 @@
 header {
     display: flex;
     justify-content: space-around;
-    padding: 0.5rem 0;
+    padding: 2rem 0;
     background-color: #FFF;
     width: 100%;
     position: sticky;
+    display: flex;
+    align-items: center;
     top: 0;
     /* height: 100%; */
     z-index: 999;
