@@ -35,7 +35,7 @@ public class ExampleController {
 
     public void registerExamples(MemoryMissingReportDatabase reportDatabase) {
         Random random = new Random();
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < 100; i++) {
             boolean male = random.nextBoolean();
             MissingReport samplePerson = new MissingReportBaseBuilder()
                     .randomUuid()
