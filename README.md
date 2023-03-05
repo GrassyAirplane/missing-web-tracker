@@ -21,7 +21,7 @@ Missing-Web-Tracker is a web application that offers a one-stop website for trac
 - Learning new framework (Spring Boot)
 - Cross platform support
 - Web scraping
-- Lack of time
+- Time constraint
 
 ## Accomplishment we are proud of 
 We're proud of creating a web application that has the potential to help reunite missing people and pets with their families. We're also proud of the user-friendly interface we've created, which makes it easy for investigators and other users to find the information they need.
