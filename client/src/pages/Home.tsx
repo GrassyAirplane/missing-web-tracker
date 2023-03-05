@@ -18,6 +18,8 @@ const Home = () => {
 
     var targetUrl = window.location.origin;
 
+    console.log(targetUrl)
+
     useEffect(() => {
       fetch(targetUrl + "/reports?reportType=PERSON")
         .then(response => response.json())
