@@ -14,7 +14,7 @@ const Home = () => {
     const [peopleCards, setPeopleCards] = useState([]);
     const [petCards, setPetCards] = useState([]);
 
-    var targetUrl = "http://" + window.location.host;
+    var targetUrl = "http://" + window.location.hostname;
 
     useEffect(() => {
       fetch(targetUrl + ":9999/reports?reportType=PERSON")
