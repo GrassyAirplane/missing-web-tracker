@@ -10,7 +10,7 @@
 //     age?: number;
 //     gender?: string;
 
-//     // For missing pets
+//     // For missing pets  
 //     animal?: string;
 //     breed?: string;
 
@@ -18,25 +18,103 @@
 //     handleClick?: () => void;
 // }
 import "./Card.css"
+import maleIcon from "../assets/male-svgrepo-com.svg"
+import femaleIcon from "../assets/female-svgrepo-com.svg"
+import dogIcon from "../assets/dog-5-svgrepo-com.svg"
+import catIcon from "../assets/cat-svgrepo-com.svg"
+import { useEffect, useState } from "react"
+import Swal from "sweetalert2"
 
 const Card = (props) => {
-    return (
-            <div className="card-container">
-              <img src={props.imgSrc} alt="" />
-              <h2>{props.name}</h2>
-              <p className="age">{props.age}</p>
-              <p className="last-seen">{props.lastSeen}</p>
-              <p className="distance">{props.distance} away</p>
-              <p className="description">{props.description}</p>
-              <button className="btn" onClick={props.handleClick}>
-                View Details
-              </button>
-            </div>
-          
-    )
-}
+    const [distance, setDistance] = useState(null);
+    
+    useEffect(() => {
+        navigator.geolocation.getCurrentPosition(
+            (position) => {
+                const { latitude: lat1, longitude: lon1 } = position.coords;
+                const [lat2, lon2] = props.person["last-known-location"];
+    
+                const R = 6371; // Earth's radius in km
+                const dLat = deg2rad(lat2 - lat1);
+                const dLon = deg2rad(lon2 - lon1);
+                const a = Math.sin(dLat/2) * Math.sin(dLat/2) + 
+                          Math.cos(deg2rad(lat1)) * Math.cos(deg2rad(lat2)) * 
+                          Math.sin(dLon/2) * Math.sin(dLon/2);
+                const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a)); 
+                let distance = R * c; // Distance in km
+    
+                if (distance === 0) {
+                    distance = distance.toFixed(1); // Round to 1 decimal point if distance is 0
+                } else {
+                    distance = Math.round(distance); // Round to nearest whole number otherwise
+                }
+    
+                setDistance(distance); // Set the distance in state
+            },
+            (error) => console.log(error),
+            { enableHighAccuracy: true, timeout: 20000, maximumAge: 1000 }
+        );
+    }, [props.person]);
 
-export default Card
+    const handleClick = () => {
+        Swal.fire({
+          title: 'Details',
+          text: 'You clicked on the marker!',
+          icon: 'info',
+          html: `<div>Name: ${props.person.name}</div>
+                 <div>Age: ${props.person.age[0]}</div>
+                 <div>Desc: ${props.person.appearance}</div>
+                 <div>Dist: ${distance} KM away</div>`,
+          cancelButtonText: 'OK',
+          showCancelButton: true,
+          confirmButtonText: 'Map',
+          showCloseButton: true,
+          preConfirm: () => {
+            window.location.href = 'https://www.example.com'; // Replace with desired URL
+          },
+          iconColor: 'teal' 
+        });
+      };
+
+    // Helper function to convert degrees to radians
+    const deg2rad = (deg) => {
+        return deg * (Math.PI/180);
+    };
+
+    return (
+        <div className="card-container">
+            <img
+                src={
+                    props.person["report-type"] === "PERSON"
+                        ? 5 > 2
+                            ? maleIcon
+                            : femaleIcon
+                        : props.person.extension["animal-type"].toLowerCase() === "dog"
+                        ? dogIcon
+                        : catIcon
+                }
+                alt=""
+                style={{ width: "10rem", height: "10rem" }}
+            />
+            <h2>{props.person.name}</h2>
+            {/* <p className="age">
+                {props.person["report-type"] === "PERSON"
+                    ? props.person.age[0]
+                    : props.person.age[1]}
+            </p> */}
+            <p className="last-seen">{props.person.lastSeen}</p>
+            {distance !== null && (
+                <p className="distance">{distance} KM away</p>
+            )}
+            <p className="description">{props.person.description}</p>
+            <button className="btn" onClick={handleClick}>
+                View Details
+            </button>
+        </div>
+    );
+};
+
+export default Card;
 
 
 //   {/* The div below ensures that the card holds its shape even before the img loads
