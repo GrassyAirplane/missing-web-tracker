@@ -47,7 +47,7 @@ const SearchBar = () => {
                 "report-source-type": reportSourceType
               };
               fetch(targetUrl + ':9999/reports', {
-                method: 'POST',
+                method: 'PUT',
                 body: JSON.stringify(formData),
                 headers: {
                   'Content-Type': 'application/json'
