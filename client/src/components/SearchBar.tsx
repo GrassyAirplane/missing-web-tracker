@@ -40,10 +40,12 @@ const SearchBar = () => {
               const gender = Swal.getPopup().querySelector('#gender').value;
               const reportSourceType = Swal.getPopup().querySelector('input[name="report-source"]:checked').value;
               const formData = {
-                name,
+                "name": name,
                 "last-seen-date": lastSeenDate,
                 "last-known-location": lastKnownLocation,
-                gender,
+                "extensions": {
+                    "gender": gender
+                },
                 "report-source-type": reportSourceType
               };
               fetch(targetUrl + ':9999/reports', {
