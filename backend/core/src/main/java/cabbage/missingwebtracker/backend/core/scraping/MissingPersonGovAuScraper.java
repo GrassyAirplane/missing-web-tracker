@@ -12,7 +12,6 @@ import org.jsoup.select.Elements;
 import org.spongepowered.configurate.ConfigurationNode;
 import org.spongepowered.configurate.jackson.JacksonConfigurationLoader;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.json.JacksonJsonParser;
 
 import java.io.IOException;
 import java.net.URL;
@@ -24,8 +23,6 @@ import java.util.Collection;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
-import java.util.concurrent.CompletableFuture;
-import java.util.concurrent.ForkJoinPool;
 
 public class MissingPersonGovAuScraper {
 
@@ -35,30 +32,6 @@ public class MissingPersonGovAuScraper {
 
     @Autowired
     private MemoryMissingReportDatabase reportDatabase;
-
-    public void updateDatabase() {
-        CompletableFuture<List<MissingReport>> future = new CompletableFuture<>();
-        ForkJoinPool.commonPool().submit(() -> future.complete(performScrape()));
-        future.thenAccept(reports -> {
-            for (MissingReport report : reports) {
-                if (this.reportDatabase.findReport(report.uuid()).isEmpty()) {
-                    this.reportDatabase.submitReport(report);
-                }
-            }
-        });
-    }
-
-    public List<MissingReport> performScrape() throws IOException {
-        Collection<String> links = new HashSet<>(compileLinks());
-        Collection<ScrapedReport> scrapedReports = new ArrayList<>(links.size());
-        for (String link : links) {
-            ScrapedReport report = scrapeLink(link);
-            if (report != null) {
-                scrapedReports.add(report);
-            }
-        }
-        return convertToMissingReport(scrapedReports);
-    }
 
     public static double[] queryLocation(String location) throws IOException {
         String actualLocation = location.replace(" ", "");
@@ -78,6 +51,31 @@ public class MissingPersonGovAuScraper {
         double lat = locNode.node("lat").getDouble();
         double lng = locNode.node("lng").getDouble();
         return new double[]{lat, lng};
+    }
+
+    public void updateDatabase() {
+        try {
+            List<MissingReport> reports = performScrape();
+            for (MissingReport report : reports) {
+                if (this.reportDatabase.findReport(report.uuid()).isEmpty()) {
+                    this.reportDatabase.submitReport(report);
+                }
+            }
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+    }
+
+    public List<MissingReport> performScrape() throws IOException {
+        Collection<String> links = new HashSet<>(compileLinks());
+        Collection<ScrapedReport> scrapedReports = new ArrayList<>(links.size());
+        for (String link : links) {
+            ScrapedReport report = scrapeLink(link);
+            if (report != null) {
+                scrapedReports.add(report);
+            }
+        }
+        return convertToMissingReport(scrapedReports);
     }
 
     private List<MissingReport> convertToMissingReport(Collection<ScrapedReport> reports) {

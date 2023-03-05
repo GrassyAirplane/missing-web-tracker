@@ -26,7 +26,7 @@ public class ExampleController {
 
     @Autowired
     public ExampleController(MemoryMissingReportDatabase reportDatabase, MissingPersonGovAuScraper scraper) {
-        registerExamples(reportDatabase);
+        registerScraping(scraper);
     }
 
     public double[] generateRandomCoordinates(Random random) {
