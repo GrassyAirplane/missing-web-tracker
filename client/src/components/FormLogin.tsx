@@ -61,9 +61,9 @@ const FormLogin = (props: FormLoginProps) => {
         // You can perform the login logic here, such as calling an API to authenticate the user
         const response = await fetch('http://localhost:8080/login', {
           method: 'POST',
-          body: formData,
-          mode: 'no-cors'
+          body: formData
         })
+        console.log(response)
     
         if (response.ok) {
           // handle login logic
