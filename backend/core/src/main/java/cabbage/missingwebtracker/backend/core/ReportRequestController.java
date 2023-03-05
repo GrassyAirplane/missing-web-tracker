@@ -13,12 +13,14 @@ import org.spongepowered.configurate.ConfigurateException;
 import org.spongepowered.configurate.ConfigurationNode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
@@ -97,12 +99,13 @@ public class ReportRequestController {
         }
     }
 
-    @PutMapping(value = "/reports")
-    public void submitReport(String json, HttpServletResponse response) {
+    @PutMapping(value = "/reports", consumes = {MediaType.APPLICATION_JSON_VALUE})
+    public void submitReport(@RequestBody String json, HttpServletResponse response) {
         Optional<MissingReport> optionalMissingReport;
         try {
             optionalMissingReport = SerializationContext.createNewReport(json);
         } catch (ConfigurateException ex) {
+            ex.printStackTrace();
             response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
             return;
         }

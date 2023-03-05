@@ -15,7 +15,7 @@ public class MissingReportExtensionSerializer implements TypeSerializer<MissingR
         if (parent == null) {
             throw new SerializationException("Cannot locate report type without parent");
         }
-        ConfigurationNode nodeReportType = parent.node("recordType");
+        ConfigurationNode nodeReportType = parent.node("report-type");
         if (nodeReportType == null || nodeReportType.isNull()) {
             return null;
         }
