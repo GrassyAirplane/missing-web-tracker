@@ -83,42 +83,6 @@ const Account = () => {
             <div className="grid-item col-span-2 missing p-6 shadow rounded-3xl missing-info">
                 <h1 className="text-3xl">I am looking for...</h1>
                 <div className="overflow-x-auto flex flex-row gap-4 mt-3">
-                    <Card name={ex_info.name} 
-                        lastKnownLocation={ex_info.lastKnownLocation} 
-                        appearanceDescription={ex_info.appearanceDescription}
-                        sourceOfReport={ex_info.sourceOfReport}
-                        uuid={ex_info.uuid}
-                        age={ex_info.age}
-                        gender={ex_info.gender}
-                        imgSrc={ex_info.imgSrc}
-                    />
-                    <Card name={ex_info.name} 
-                        lastKnownLocation={ex_info.lastKnownLocation} 
-                        appearanceDescription={ex_info.appearanceDescription}
-                        sourceOfReport={ex_info.sourceOfReport}
-                        uuid={ex_info.uuid}
-                        age={ex_info.age}
-                        gender={ex_info.gender}
-                        imgSrc={ex_info.imgSrc}
-                    />
-                    <Card name={ex_info.name} 
-                        lastKnownLocation={ex_info.lastKnownLocation} 
-                        appearanceDescription={ex_info.appearanceDescription}
-                        sourceOfReport={ex_info.sourceOfReport}
-                        uuid={ex_info.uuid}
-                        age={ex_info.age}
-                        gender={ex_info.gender}
-                        imgSrc={ex_info.imgSrc}
-                    />
-                    <Card name={ex_info.name} 
-                        lastKnownLocation={ex_info.lastKnownLocation} 
-                        appearanceDescription={ex_info.appearanceDescription}
-                        sourceOfReport={ex_info.sourceOfReport}
-                        uuid={ex_info.uuid}
-                        age={ex_info.age}
-                        gender={ex_info.gender}
-                        imgSrc={ex_info.imgSrc}
-                    />
                 </div>
                 
             </div>
