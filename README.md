@@ -18,7 +18,7 @@ Missing-Web-Tracker is a web application that offers a one-stop website for trac
 - Express.js, Spring Boot, Google Map API (back-end)
 
 ## Challenges we ran into
-- Learning nea framework (Spring Boot)
+- Learning new framework (Spring Boot)
 - Cross platform support
 - Web scraping
 
