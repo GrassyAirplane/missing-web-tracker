@@ -56,9 +56,7 @@ function FormRegister({ onAlreadyHaveAccountClick }: Props): JSX.Element {
     const response = await fetch('http://localhost:8080/register', {
         method: 'POST',
         body: formData,
-        
     });
-
     // handle the response from the server
     if (response.status === 200) {
         Sweetalert2.fire({
@@ -71,6 +69,13 @@ function FormRegister({ onAlreadyHaveAccountClick }: Props): JSX.Element {
             console.log('Registration successful!');
             handleSignInClick()
           })
+    } else if (response.status === 409) {
+        Sweetalert2.fire({
+                    icon: 'error',
+                    iconColor: 'teal',
+                    title: 'Registration Failed',
+                    text: 'User already exists',
+                  })
     } else {
         Sweetalert2.fire({
           icon: 'error',

@@ -68,7 +68,8 @@ const Card = (props) => {
                  <div>Age: ${props.person.age[0]}</div>
                  <div>Desc: ${props.person.appearance}</div>
                  <div>Last Seen: ${formattedDate} </div>
-                 <div>Dist: ${distance} KM away</div>`,
+                 <div>Dist: ${distance} KM away</div>
+                 <div>Source: ${props.person["report-source-type"]}</div>`,
           cancelButtonText: 'OK',
           showCancelButton: true,
           confirmButtonText: 'Map',

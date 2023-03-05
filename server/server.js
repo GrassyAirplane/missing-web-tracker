@@ -7,6 +7,7 @@ const upload = multer();
 const moment = require('moment');
 const axios = require('axios');
 
+
 const PORT = 8080;
 
 const user_database = {}
@@ -14,24 +15,21 @@ const user_database = {}
 app.use(
     cors({
       origin: [
-        "http://127.0.0.1:5173",
-        "http://127.0.0.1:5174",
         "http://localhost:5173",
-        "http://127.0.0.1:9545/",
-        "http://localhost:5173/%27",
-        "http://localhost:5173/#",
+        "http://127.0.0.1:5174",
+        "http://127.0.0.1:9545",
       ],
     })
 );
 
+app.use((req, res, next) => {
+  res.setHeader('Access-Control-Allow-Origin', 'http://localhost:5173');
+  next();
+});
+
 // parse application/json requests
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-
-app.use((req, res, next) => {
-  res.setHeader('Access-Control-Allow-Origin', 'http://localhost:5173/%27');
-  next();
-});
 
 app.listen(
     PORT,
@@ -87,8 +85,9 @@ app.post('/login', upload.none(), (req, res) => {
 
   if (user_database[email].password === password) {
     res.status(200).send("Login successful");
+  } else {
+    res.status(400).send("Login failed");
   }
-  res.status(400).send("Login failed");
 })
 
 // Register a new user
@@ -99,8 +98,11 @@ app.post('/register', upload.none(), (req, res) => {
   const password = req.body.password;
   console.log(email)
 
+  res.setHeader("Access-Control-Allow-Origin", "http://localhost:5173")
+
   if (user_database.hasOwnProperty(email)) {
-    console.log("The user is already registered");
+    res.sendStatus(409)
+    return;
   } else {
     user_database[email] = {
       password: password,
@@ -108,9 +110,8 @@ app.post('/register', upload.none(), (req, res) => {
       missing_people: [],
       missing_pets: []
     }
-    console.log("successful")
+    res.sendStatus(200)
   }
-  res.status(200).sendStatus(200)
 })
 
 app.post('/reports/human', (req, res) => {
@@ -160,6 +161,7 @@ app.use((req, res, next) => {
   res.setHeader('Access-Control-Allow-Origin', 'http://localhost:5173');
   next();
 });
+
 
 app.get('/reports', async (req, res) => {
   const reportType = req.query.reportType;
