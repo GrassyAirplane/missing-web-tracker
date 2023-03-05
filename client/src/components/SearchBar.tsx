@@ -46,7 +46,7 @@ const SearchBar = () => {
                 gender,
                 "report-source-type": reportSourceType
               };
-              fetch(targetUrl'/reports', {
+              fetch(targetUrl'/reports'), {
                 method: 'POST',
                 body: JSON.stringify(formData),
                 headers: {
