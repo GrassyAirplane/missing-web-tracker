@@ -7,7 +7,7 @@ import { RootState } from '../redux/store';
 
 const SearchBar = () => {
 
-    targetUrl = window.location.origin
+    var targetUrl = window.location.origin
 
     const [interestLocation, setinterestLocation] = useState<google.maps.LatLngLiteral | null>(null);
     const isLookingForPerson = useSelector((state: RootState) => state.toggler.isLookingForPerson);
@@ -46,7 +46,7 @@ const SearchBar = () => {
                 gender,
                 "report-source-type": reportSourceType
               };
-              fetch(targetUrl'/reports'), {
+              fetch(targetUrl + '/reports', {
                 method: 'POST',
                 body: JSON.stringify(formData),
                 headers: {
