@@ -4,7 +4,9 @@ const app = express();
 const bodyParser = require('body-parser');
 const multer = require('multer');
 const upload = multer();
-const axios = require('axios')
+const moment = require('moment');
+const axios = require('axios');
+
 
 const PORT = 8080;
 
@@ -111,6 +113,55 @@ app.post('/register', upload.none(), (req, res) => {
     res.sendStatus(200)
   }
 })
+
+app.post('/reports/human', (req, res) => {
+  const { name, age, 'last-seen-date': lastSeenDate, 'last-known-location': lastKnownLocation, gender, 'report-source-type': reportSourceType } = req.body;
+
+  const epochTimestamp = moment(lastSeenDate, 'DD/MM/YY').valueOf();
+
+  const geocodeUrl = `https://maps.googleapis.com/maps/api/geocode/json?address=${lastKnownLocation}&key=${"AIzaSyB9kymd14djtap86pyy5jNeweDcDvHeuX0"}`;
+
+  axios.get(geocodeUrl)
+    .then((response) => {
+      const location = response.data.results[0].geometry.location;
+      const latitude = location.lat;
+      const longitude = location.lng;
+      const report = { name,'last-seen-epoch-milli': epochTimestamp, 'last-known-location': [latitude, longitude], gender, 'report-source-type': reportSourceType };
+      console.log(report);
+      axios.put('http://localhost:9999/reports', report)
+        .then(() => res.sendStatus(200))
+        .catch((error) => {
+          console.error(error);
+          res.sendStatus(500);
+        });
+    })
+    .catch((error) => {
+      console.error(error);
+      res.sendStatus(500);
+    });
+});
+
+app.post('/reports/pet', (req, res) => {
+  console.log(req.body)
+  const { name, 'last-seen-date': lastSeenDate, 'last-known-location': lastKnownLocation, 'pet-type': petType, 'pet-breed': petBreed, 'report-source-type': reportSourceType } = req.body;
+
+  const epochTimestamp = moment(lastSeenDate, 'DD/MM/YY').unix();
+
+  const report = { name, 'last-seen-date': epochTimestamp, 'last-known-location': lastKnownLocation, 'pet-type': petType, 'pet-breed': petBreed, 'report-source-type': reportSourceType };
+
+  console.log(report);
+
+  
+
+});
+
+
+
+app.use((req, res, next) => {
+  res.setHeader('Access-Control-Allow-Origin', 'http://localhost:5173');
+  next();
+});
+
 
 app.get('/reports', async (req, res) => {
   const reportType = req.query.reportType;
