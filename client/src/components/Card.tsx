@@ -24,6 +24,7 @@ import dogIcon from "../assets/dog-5-svgrepo-com.svg"
 import catIcon from "../assets/cat-svgrepo-com.svg"
 import { useEffect, useState } from "react"
 import Swal from "sweetalert2"
+import { useHistory } from 'react-router-dom';
 
 const Card = (props) => {
     const [distance, setDistance] = useState(null);
@@ -57,6 +58,8 @@ const Card = (props) => {
     }, [props.person]);
 
     const handleClick = () => {
+        const lat = props.person["last-known-location"][0];
+        const long = props.person["last-known-location"][1];
         Swal.fire({
           title: 'Details',
           text: 'You clicked on the marker!',
@@ -70,7 +73,7 @@ const Card = (props) => {
           confirmButtonText: 'Map',
           showCloseButton: true,
           preConfirm: () => {
-            window.location.href = 'https://www.example.com'; // Replace with desired URL
+            window.location.assign(`http://localhost:5173/map?lat=${lat}&lng=${long}`);
           },
           iconColor: 'teal' 
         });
@@ -86,7 +89,7 @@ const Card = (props) => {
             <img
                 src={
                     props.person["report-type"] === "PERSON"
-                        ? 5 > 2
+                        ? props.person.extension.gender === "MALE"
                             ? maleIcon
                             : femaleIcon
                         : props.person.extension["animal-type"].toLowerCase() === "dog"

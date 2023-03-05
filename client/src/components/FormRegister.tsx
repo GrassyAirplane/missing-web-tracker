@@ -56,7 +56,7 @@ function FormRegister({ onAlreadyHaveAccountClick }: Props): JSX.Element {
     const response = await fetch('http://localhost:8080/register', {
         method: 'POST',
         body: formData,
-        mode: 'no-cors'
+        
     });
 
     // handle the response from the server
@@ -106,9 +106,6 @@ function FormRegister({ onAlreadyHaveAccountClick }: Props): JSX.Element {
         </div>
         <form name="register" className="form" onSubmit={handleSubmit}>
         <div className="input-control input-field">
-            <label htmlFor="email" className="input-label" hidden>
-              Username
-            </label>
             <input
               type="Username"
               name="Username"
@@ -120,9 +117,6 @@ function FormRegister({ onAlreadyHaveAccountClick }: Props): JSX.Element {
             />
           </div>
           <div className="input-control input-field">
-            <label htmlFor="email" className="input-label" hidden>
-              Email Address
-            </label>
             <input
               type="email"
               name="email"
@@ -134,9 +128,6 @@ function FormRegister({ onAlreadyHaveAccountClick }: Props): JSX.Element {
             />
           </div>
           <div className="input-control input-field">
-            <label htmlFor="password" className="input-label" hidden>
-              Password
-            </label>
             <input
               type="password"
               name="password"
@@ -148,9 +139,6 @@ function FormRegister({ onAlreadyHaveAccountClick }: Props): JSX.Element {
             />
           </div>
           <div className="input-control input-field">
-            <label htmlFor="confirmPassword" className="input-label" hidden>
-              Confirm Password
-            </label>
             <input
               type="password"
               name="confirmPassword"

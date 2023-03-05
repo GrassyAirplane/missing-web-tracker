@@ -2,6 +2,7 @@ import { useEffect, useMemo, useState } from "react";
 import { GoogleMap, useLoadScript, Marker} from "@react-google-maps/api";
 import React from "react";
 import HumanMarker from "./HumanMarker";
+import { useLocation } from 'react-router-dom';
 
 interface MapControlsProps {
     center: google.maps.LatLngLiteral;
@@ -30,6 +31,14 @@ const MapView = (prop: Coordinate) => {
 
     const [markers, setMarkers] = useState([]);
 
+    const location = useLocation();
+    const lati = parseFloat(new URLSearchParams(location.search).get('lat'));
+    const long = parseFloat(new URLSearchParams(location.search).get('lng'));
+
+    console.log("MVAFS")
+    console.log(lati)
+    console.log(long)
+
     useEffect(() => {
       fetch("http://localhost:9999/reports")
         .then(response => response.json())
@@ -51,7 +60,7 @@ const MapView = (prop: Coordinate) => {
 
     const mapContainerStyle = {
         width: "80vw",
-        height: "80vh",
+        height: "65vh",
         borderRadius: "20px",
     };
 
@@ -106,21 +115,13 @@ const MapView = (prop: Coordinate) => {
         mapRef.current.panTo(center);
       }
     };
-
-    // THIS IS THE GEO LOCATION, CHANGE POTENTIALY
-    useEffect(() => {
-        navigator.geolocation.getCurrentPosition(
-        (position) => {
-            const { latitude, longitude } = position.coords;
-            setinterestLocation({ lat: latitude, lng: longitude });
-        },
-        (error) => console.log(error),
-        { enableHighAccuracy: true, timeout: 20000, maximumAge: 1000 }
-        );
-    }, []);
     
-    const center = useMemo(() => (interestLocation ? interestLocation : { lat: 37.7749, lng: -122.4194 }), [interestLocation]);
-    console.log(interestLocation)
+    let center = interestLocation ? interestLocation : { lat: 37.7749, lng: -122.4194 }
+
+    if (lati && long) {
+      center = {lat: lati, lng: long}
+    }
+  
     return (
         <div>
           {loadError && <div>Map cannot be loaded right now, sorry.</div>}

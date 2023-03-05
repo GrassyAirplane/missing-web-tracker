@@ -17,10 +17,10 @@ import java.util.Random;
 @Controller
 public class ExampleController {
 
-    private static final double[] GLOBAL = new double[]{-180, 180};
+    private static final double[] GLOBAL = new double[] { -180, 180 };
 
-    private static final double[] MAX_MELB = new double[]{-37.564340, 145.429444};
-    private static final double[] MIN_MELB = new double[]{-38.126187, 144.397366};
+    private static final double[] MAX_MELB = new double[] { -37.564340, 145.429444 };
+    private static final double[] MIN_MELB = new double[] { -38.126187, 144.397366 };
 
     @Autowired
     public ExampleController(MemoryMissingReportDatabase reportDatabase) {
@@ -28,9 +28,9 @@ public class ExampleController {
     }
 
     public double[] generateRandomCoordinates(Random random) {
-        final double lat = random.nextDouble(GLOBAL[0], GLOBAL[1]);
+        final double lat = random.nextDouble(-85, 85);
         final double lng = random.nextDouble(GLOBAL[0], GLOBAL[1]);
-        return new double[]{lat, lng};
+        return new double[] { lat, lng };
     }
 
     public void registerExamples(MemoryMissingReportDatabase reportDatabase) {
@@ -39,10 +39,10 @@ public class ExampleController {
             boolean male = random.nextBoolean();
             MissingReport samplePerson = new MissingReportBaseBuilder()
                     .randomUuid()
-                    .name("Andrew")
+                    .name("Alex")
                     .reportType(ReportType.PERSON)
                     .reportSourceType(ReportSourceType.USER)
-                    .age(new int[]{16, 0})
+                    .age(new int[] { 16, 0 })
                     .appearance("161cm, asian")
                     .lastKnownLocation(generateRandomCoordinates(random))
                     .additionalInformation("n/a")
@@ -56,7 +56,7 @@ public class ExampleController {
                     .name("Sally")
                     .reportType(ReportType.PET)
                     .reportSourceType(ReportSourceType.USER)
-                    .age(new int[]{1, 2})
+                    .age(new int[] { 1, 2 })
                     .lastKnownLocation(generateRandomCoordinates(random))
                     .lastSeenEpochMilli(System.currentTimeMillis())
                     .additionalInformation("sally likes cuddling up to random people")
