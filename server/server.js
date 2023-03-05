@@ -17,6 +17,7 @@ app.use(
         "http://localhost:5173",
         "http://127.0.0.1:9545/",
         "http://localhost:5173/%27",
+        "http://localhost:5173/#",
       ],
     })
 );
@@ -107,7 +108,7 @@ app.post('/register', upload.none(), (req, res) => {
     }
     console.log("successful")
   }
-  res.status(200)
+  res.status(200).sendStatus(200)
 })
 
 
