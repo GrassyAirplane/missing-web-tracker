@@ -20,6 +20,7 @@ const HumanMarker = (props) => {
                 icon: 'info',
                 html: `<div>Name: ${props.person.name}</div>
                        <div>Age: ${props.person.age[0]}</div>
+                       <div>Last Seen: ${formattedDate} </div>
                        <div>Desc: ${props.person.appearance}</div>
                        <div>Sex: ${props.person.extension.gender.toLowerCase()}</div>`,
                 confirmButtonText: 'OK',
@@ -32,6 +33,7 @@ const HumanMarker = (props) => {
                 icon: 'info',
                 html: `<div>Name: ${props.person.name}</div>
                        <div>Age: ${props.person.age[0]}</div>
+                       <div>Last Seen: ${formattedDate} </div>
                        <div>Type: ${props.person.extension["animal-type"]}</div>
                        <div>Breed: ${props.person.extension["breed"]}</div>
                        `,
@@ -41,6 +43,10 @@ const HumanMarker = (props) => {
         
       };
 
+      const lastSeenEpoch = props.person["last-seen-epoch-milli"];
+      const lastSeenDate = new Date(lastSeenEpoch);
+      const formattedDate = lastSeenDate.toLocaleDateString();
+  
 
     return (
         <>
