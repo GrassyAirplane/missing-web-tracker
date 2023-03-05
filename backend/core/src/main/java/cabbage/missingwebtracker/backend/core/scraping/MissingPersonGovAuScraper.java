@@ -58,7 +58,7 @@ public class MissingPersonGovAuScraper {
                 break;
             }
         }
-        final List<MissingReport> missingReports = convertToMissingReport(scrapedReports);
+        return convertToMissingReport(scrapedReports);
     }
 
     public static double[] queryLocation(String location) throws IOException {
