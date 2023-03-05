@@ -55,7 +55,6 @@ public class MissingPersonGovAuScraper {
             ScrapedReport report = scrapeLink(link);
             if (report != null) {
                 scrapedReports.add(report);
-                break;
             }
         }
         return convertToMissingReport(scrapedReports);
