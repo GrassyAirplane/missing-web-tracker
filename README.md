@@ -34,3 +34,4 @@ We're proud of creating a web application that has the potential to help reunite
 - Add a search feature
 - Complete the add a new report feature
 - Implement the web scraping capability
+  - Check the `backend` folder for web scraping functionalities that is in progress.
