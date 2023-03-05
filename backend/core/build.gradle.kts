@@ -5,6 +5,7 @@ plugins {
 }
 
 dependencies {
+    implementation("org.jsoup:jsoup:1.15.4")
     implementation("org.spongepowered:configurate-jackson:4.1.2")
     implementation("javax.annotation:javax.annotation-api:1.3.2")
     implementation("org.springframework.boot:spring-boot-starter-web")

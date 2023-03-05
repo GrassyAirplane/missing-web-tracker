@@ -7,6 +7,7 @@ import cabbage.missingwebtracker.backend.core.report.PersonExtension;
 import cabbage.missingwebtracker.backend.core.report.PetExtension;
 import cabbage.missingwebtracker.backend.core.report.ReportSourceType;
 import cabbage.missingwebtracker.backend.core.report.ReportType;
+import cabbage.missingwebtracker.backend.core.scraping.MissingPersonGovAuScraper;
 import cabbage.missingwebtracker.backend.core.util.Gender;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -22,8 +23,9 @@ public class ExampleController {
     private static final double[] MAX_MELB = new double[] { -37.564340, 145.429444 };
     private static final double[] MIN_MELB = new double[] { -38.126187, 144.397366 };
 
+
     @Autowired
-    public ExampleController(MemoryMissingReportDatabase reportDatabase) {
+    public ExampleController(MemoryMissingReportDatabase reportDatabase, MissingPersonGovAuScraper scraper) {
         registerExamples(reportDatabase);
     }
 
@@ -31,6 +33,10 @@ public class ExampleController {
         final double lat = random.nextDouble(-85, 85);
         final double lng = random.nextDouble(GLOBAL[0], GLOBAL[1]);
         return new double[] { lat, lng };
+    }
+
+    public void registerScraping(MissingPersonGovAuScraper scraper) {
+        scraper.updateDatabase();
     }
 
     public void registerExamples(MemoryMissingReportDatabase reportDatabase) {

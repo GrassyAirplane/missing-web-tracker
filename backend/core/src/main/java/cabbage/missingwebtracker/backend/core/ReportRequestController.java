@@ -3,6 +3,7 @@ package cabbage.missingwebtracker.backend.core;
 import cabbage.missingwebtracker.backend.core.database.ImageDatabase;
 import cabbage.missingwebtracker.backend.core.database.MemoryMissingReportDatabase;
 import cabbage.missingwebtracker.backend.core.report.MissingReport;
+import cabbage.missingwebtracker.backend.core.report.ReportSourceType;
 import cabbage.missingwebtracker.backend.core.report.ReportType;
 import cabbage.missingwebtracker.backend.core.util.LocationUtil;
 import cabbage.missingwebtracker.backend.core.util.SerializationContext;
@@ -38,13 +39,17 @@ public class ReportRequestController {
 
     @GetMapping(value = "/reports")
     public String queryReportsByNameOrType(@RequestParam(value = "name", required = false) String name,
-                                           @RequestParam(value = "reportType", required = false) ReportType reportType) {
+                                           @RequestParam(value = "reportType", required = false) ReportType reportType,
+                                           @RequestParam(value = "sourceType", required = false) ReportSourceType sourceType) {
         Stream<MissingReport> stream = reportDatabase.allReports().stream();
         if (name != null) {
             stream = stream.filter(report -> report.name().startsWith(name));
         }
         if (reportType != null) {
             stream = stream.filter(report -> report.reportType() == reportType);
+        }
+        if (sourceType != null) {
+            stream = stream.filter(report -> report.reportSourceType() == sourceType);
         }
         try {
             return SerializationContext.serializeReports(stream.toList());
