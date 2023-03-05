@@ -21,7 +21,7 @@ import java.util.UUID;
 import java.util.concurrent.CompletableFuture;
 
 @RestController
-@CrossOrigin(origins = {"http://localhost:8080", "http://localhost:5173"})
+//@CrossOrigin(origins = {"http://localhost:8080", "http://localhost:5173"})
 public class ImageRequestController {
     @Autowired
     private MemoryMissingReportDatabase reportDatabase;
