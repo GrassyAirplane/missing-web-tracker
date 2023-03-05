@@ -3,7 +3,7 @@
 We were inspired to create Missing-Web-Tracker after realizing that data for missing people and pets is often incomplete and difficult to access. We wanted to create a tool that would provide comprehensive and geographical clues to aid in the search for missing individuals and pets.
 
 ## What it does
-Missing-Web-Tracker is a web application that offers a one-stop website for tracking missing people and pets. It provides users with comprehensive and geographical clues, allowing investigators to get a clearer understanding of the situation. It scrapes the web to collect the latest data. Users and officials can create accounts and post new information to keep the search up-to-date as well.
+Missing-Web-Tracker is a web application that offers a one-stop website for tracking missing people and pets. It provides users with comprehensive and geographical clues, allowing investigators to get a clearer understanding of the situation. Users and officials can create accounts and post new information to keep the search up-to-date.
 
 ## How to run locally
 1. Download or clone this repo to your local machine
@@ -21,15 +21,16 @@ Missing-Web-Tracker is a web application that offers a one-stop website for trac
 - Learning new framework (Spring Boot)
 - Cross platform support
 - Web scraping
+- Lack of time
 
 ## Accomplishment we are proud of 
 We're proud of creating a web application that has the potential to help reunite missing people and pets with their families. We're also proud of the user-friendly interface we've created, which makes it easy for investigators and other users to find the information they need.
 
 ## What we learned
 - Spring Boot
-- Web scraping 
+- Web scraping (though not implemented due to time constraint)
 
 ## What's next for Missing-Web-Tracker
 - Add a search feature
 - Complete the add a new report feature
-- Improve the web scraping capability
+- Implement the web scraping capability
