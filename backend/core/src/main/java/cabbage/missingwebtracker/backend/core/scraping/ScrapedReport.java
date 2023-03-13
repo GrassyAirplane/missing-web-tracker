@@ -1,4 +1,6 @@
 package cabbage.missingwebtracker.backend.core.scraping;
 
-public record ScrapedReport(String name, int age, long lastSeenEpochMilli, String lastKnownLocation) {
+import cabbage.missingwebtracker.backend.core.util.Gender;
+
+public record ScrapedReport(String name, int age, long lastSeenEpochMilli, String lastKnownLocation, Gender gender) {
 }

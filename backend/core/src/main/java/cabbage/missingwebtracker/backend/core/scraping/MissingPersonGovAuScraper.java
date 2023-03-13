@@ -3,8 +3,10 @@ package cabbage.missingwebtracker.backend.core.scraping;
 import cabbage.missingwebtracker.backend.core.database.MemoryMissingReportDatabase;
 import cabbage.missingwebtracker.backend.core.report.MissingReport;
 import cabbage.missingwebtracker.backend.core.report.MissingReportBaseBuilder;
+import cabbage.missingwebtracker.backend.core.report.PersonExtension;
 import cabbage.missingwebtracker.backend.core.report.ReportSourceType;
 import cabbage.missingwebtracker.backend.core.report.ReportType;
+import cabbage.missingwebtracker.backend.core.util.Gender;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -23,6 +25,7 @@ import java.util.Collection;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Locale;
 
 public class MissingPersonGovAuScraper {
 
@@ -100,6 +103,7 @@ public class MissingPersonGovAuScraper {
                     .reportType(ReportType.PERSON)
                     .reportSourceType(ReportSourceType.OFFICIAL)
                     .lastKnownLocation(geoLoc)
+                    .extension(new PersonExtension(scrapedReport.gender()))
                     .build();
             missingReports.add(report);
         }
@@ -176,6 +180,17 @@ public class MissingPersonGovAuScraper {
                 if (age < 1000) {
                     builder.age(age);
                 }
+            }
+            case "gender" -> {
+                String genderContent = actualField.text();
+                Gender gender;
+                try {
+                    gender = Gender.valueOf(genderContent.toUpperCase(Locale.ENGLISH));
+                } catch (IllegalArgumentException ex) {
+                    ex.printStackTrace();
+                    return false;
+                }
+                builder.gender(gender);
             }
         }
         return true;

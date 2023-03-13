@@ -10,14 +10,14 @@ import "./Home.css"
 const Home = () => {
     const loggedIn = useSelector((state: RootState) => state.logger.loggedIn);
     const isLookingForPerson = useSelector((state: RootState) => state.toggler.isLookingForPerson);
-      
-    const url = "http://localhost:8080/reports"
 
     const [peopleCards, setPeopleCards] = useState([]);
     const [petCards, setPetCards] = useState([]);
 
+    var targetUrl = "http://" + window.location.hostname;
+
     useEffect(() => {
-      fetch("http://localhost:9999/reports?reportType=PERSON")
+      fetch(targetUrl + ":9999/reports?reportType=PERSON")
         .then(response => response.json())
         .then(data => {
           console.log("reach")
@@ -30,7 +30,7 @@ const Home = () => {
     }, []);
 
     useEffect(() => {
-        fetch("http://localhost:9999/reports?reportType=PET")
+        fetch(targetUrl + ":9999/reports?reportType=PET")
           .then(response => response.json())
           .then(data => {
             console.log("reach")

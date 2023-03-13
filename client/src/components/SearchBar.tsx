@@ -7,6 +7,8 @@ import { RootState } from '../redux/store';
 
 const SearchBar = () => {
 
+    const targetUrl = "http://" + window.location.hostname;
+
     const [interestLocation, setinterestLocation] = useState<google.maps.LatLngLiteral | null>(null);
     const isLookingForPerson = useSelector((state: RootState) => state.toggler.isLookingForPerson);
     
@@ -31,46 +33,62 @@ const SearchBar = () => {
             `,
             showCancelButton: true,
             confirmButtonText: 'Submit',
-            preConfirm: () => {
-              const name = Swal.getPopup().querySelector('#name').value;
-              const lastSeenDate = Swal.getPopup().querySelector('#last-seen-date').value;
-              const lastKnownLocation = Swal.getPopup().querySelector('#last-known-location').value;
-              const gender = Swal.getPopup().querySelector('#gender').value;
-              const reportSourceType = Swal.getPopup().querySelector('input[name="report-source"]:checked').value;
-              const formData = {
-                name,
-                "last-seen-date": lastSeenDate,
-                "last-known-location": lastKnownLocation,
-                gender,
-                "report-source-type": reportSourceType
-              };
-              fetch('http://localhost:8080/reports/human', {
-                method: 'POST',
-                body: JSON.stringify(formData),
-                headers: {
-                  'Content-Type': 'application/json'
+            preConfirm: async () => {
+                const name = Swal.getPopup().querySelector('#name').value;
+                const lastSeenDate = Swal.getPopup().querySelector('#last-seen-date').value;
+                const lastSeenEpochMilli = Date.parse(lastSeenDate)
+                const lastKnownLocation = Swal.getPopup().querySelector('#last-known-location').value;
+                const geocoder = new google.maps.Geocoder();
+                const geocodedResponse = await geocoder.geocode({'address': lastKnownLocation});
+                if (geocodedResponse.results.length === 0) {
+                    Swal.fire({
+                        title: 'Error',
+                        text: "Internal server error",
+                        icon: 'error'
+                    })
+                    return;
                 }
-              })
-              .then(response => {
-                if (!response.ok) {
-                  throw new Error(response.statusText)
-                }
-                return response.json()
-              })
-              .then(data => {
-                Swal.fire({
-                  title: 'Success',
-                  text: 'Report added successfully',
-                  icon: 'success'
+                const geoResult = geocodedResponse.results[0];
+                const geocodedLocation = [geoResult.geometry.location.lat(), geoResult.geometry.location.lng()];
+                const gender = Swal.getPopup().querySelector('#gender').value;
+                const reportSourceType = Swal.getPopup().querySelector('input[name="report-source"]:checked').value;
+                const formData = {
+                    "name": name,
+                    "report-type": "PERSON",
+                    "last-seen-epoch-milli": lastSeenEpochMilli,
+                    "last-known-location": geocodedLocation,
+                    "extension": {
+                        "gender": gender
+                    },
+                    "report-source-type": reportSourceType
+                };
+                fetch(targetUrl + ':9999/reports', {
+                    method: 'PUT',
+                    body: JSON.stringify(formData),
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
                 })
-              })
-              .catch(error => {
-                Swal.fire({
-                  title: 'Error',
-                  text: error.message,
-                  icon: 'error'
-                })
-              })
+                    .then(response => {
+                        if (!response.ok) {
+                            throw new Error(response.statusText)
+                        }
+                        return;
+                    })
+                    .then(data => {
+                        Swal.fire({
+                            title: 'Success',
+                            text: 'Report added successfully',
+                            icon: 'success'
+                        })
+                    })
+                    .catch(error => {
+                        Swal.fire({
+                            title: 'Error',
+                            text: error.message,
+                            icon: 'error'
+                        })
+                    })
             },
             iconColor: 'teal'
           });
@@ -110,7 +128,7 @@ const SearchBar = () => {
                     "pet-breed": petBreed,
                     "report-source-type": reportSourceType
                   };
-                  fetch('http://localhost:8080/reports/pet', {
+                  fetch(targetUrl + ':9999/reports', {
                     method: 'POST',
                     body: JSON.stringify(formData),
                     headers: {
